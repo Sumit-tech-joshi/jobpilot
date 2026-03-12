@@ -17,7 +17,7 @@ export default function GeneratePanel({ job }: GeneratePanelProps) {
   const [coverLetter, setCoverLetter] = useState<string | null>(null);
   const [loadingResume, setLoadingResume] = useState(false);
   const [loadingCover, setLoadingCover] = useState(false);
-  const [loadingDownload, setLoadingDownload] = useState(false);
+  const [loadingDownload, setLoadingDownload] = useState<string | null>(null);
   const [status, setStatus] = useState<ApplicationStatus>('saved');
   const [notes, setNotes] = useState('');
   const [savedStatus, setSavedStatus] = useState(false);
@@ -73,32 +73,33 @@ export default function GeneratePanel({ job }: GeneratePanelProps) {
     }
   }
 
-  async function handleDownload(type: 'resume' | 'coverletter') {
+  async function handleDownload(type: 'resume' | 'coverletter', format: 'docx' | 'pdf') {
     const content = type === 'resume' ? JSON.stringify(resume) : coverLetter;
     if (!content) return;
 
-    setLoadingDownload(true);
+    const key = `${type}-${format}`;
+    setLoadingDownload(key);
     try {
       const res = await fetch('/api/generate/download', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type, content, jobTitle: job.title, companyName: job.company }),
+        body: JSON.stringify({ type, format, content, jobTitle: job.title, companyName: job.company }),
       });
       if (!res.ok) throw new Error('Download failed');
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download =
-        type === 'resume'
-          ? `Sumit_Joshi_Resume_${job.company.replace(/\s+/g, '_')}.docx`
-          : `Sumit_Joshi_CoverLetter_${job.company.replace(/\s+/g, '_')}.docx`;
+      const safeName = job.company.replace(/\s+/g, '_');
+      a.download = type === 'resume'
+        ? `Sumit_Joshi_Resume_${safeName}.${format}`
+        : `Sumit_Joshi_CoverLetter_${safeName}.${format}`;
       a.click();
       URL.revokeObjectURL(url);
     } catch {
       setError('Download failed. Please try again.');
     } finally {
-      setLoadingDownload(false);
+      setLoadingDownload(null);
     }
   }
 
@@ -242,26 +243,44 @@ export default function GeneratePanel({ job }: GeneratePanelProps) {
           {activeTab === 'resume' && resume && (
             <>
               <ResumePreview resume={resume} />
-              <button
-                onClick={() => handleDownload('resume')}
-                disabled={loadingDownload}
-                className="mt-3 w-full bg-green-700/20 hover:bg-green-700/40 text-green-400 border border-green-700/40 font-medium py-2.5 rounded-lg text-sm transition-colors disabled:opacity-50"
-              >
-                {loadingDownload ? 'Preparing...' : 'Download Resume (.docx)'}
-              </button>
+              <div className="mt-3 flex gap-2">
+                <button
+                  onClick={() => handleDownload('resume', 'pdf')}
+                  disabled={loadingDownload !== null}
+                  className="flex-1 bg-green-700/20 hover:bg-green-700/40 text-green-400 border border-green-700/40 font-medium py-2.5 rounded-lg text-sm transition-colors disabled:opacity-50"
+                >
+                  {loadingDownload === 'resume-pdf' ? 'Preparing...' : 'Download PDF'}
+                </button>
+                <button
+                  onClick={() => handleDownload('resume', 'docx')}
+                  disabled={loadingDownload !== null}
+                  className="flex-1 bg-[#1F4E79]/20 hover:bg-[#1F4E79]/40 text-[#4a9eda] border border-[#1F4E79]/40 font-medium py-2.5 rounded-lg text-sm transition-colors disabled:opacity-50"
+                >
+                  {loadingDownload === 'resume-docx' ? 'Preparing...' : 'Download DOCX'}
+                </button>
+              </div>
             </>
           )}
 
           {activeTab === 'coverletter' && coverLetter && (
             <>
               <CoverLetterPreview text={coverLetter} />
-              <button
-                onClick={() => handleDownload('coverletter')}
-                disabled={loadingDownload}
-                className="mt-3 w-full bg-green-700/20 hover:bg-green-700/40 text-green-400 border border-green-700/40 font-medium py-2.5 rounded-lg text-sm transition-colors disabled:opacity-50"
-              >
-                {loadingDownload ? 'Preparing...' : 'Download Cover Letter (.docx)'}
-              </button>
+              <div className="mt-3 flex gap-2">
+                <button
+                  onClick={() => handleDownload('coverletter', 'pdf')}
+                  disabled={loadingDownload !== null}
+                  className="flex-1 bg-green-700/20 hover:bg-green-700/40 text-green-400 border border-green-700/40 font-medium py-2.5 rounded-lg text-sm transition-colors disabled:opacity-50"
+                >
+                  {loadingDownload === 'coverletter-pdf' ? 'Preparing...' : 'Download PDF'}
+                </button>
+                <button
+                  onClick={() => handleDownload('coverletter', 'docx')}
+                  disabled={loadingDownload !== null}
+                  className="flex-1 bg-[#1F4E79]/20 hover:bg-[#1F4E79]/40 text-[#4a9eda] border border-[#1F4E79]/40 font-medium py-2.5 rounded-lg text-sm transition-colors disabled:opacity-50"
+                >
+                  {loadingDownload === 'coverletter-docx' ? 'Preparing...' : 'Download DOCX'}
+                </button>
+              </div>
             </>
           )}
         </div>

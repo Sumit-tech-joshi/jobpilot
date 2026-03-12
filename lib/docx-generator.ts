@@ -3,16 +3,16 @@ import {
   Packer,
   Paragraph,
   TextRun,
-  HeadingLevel,
   AlignmentType,
   BorderStyle,
   LevelFormat,
   convertInchesToTwip,
+  TabStopPosition,
+  TabStopType,
 } from 'docx';
 import { GeneratedResume } from '@/types';
 import { masterProfile } from '@/data/master-profile';
 
-// Shared bullet numbering config
 const BULLET_NUMBERING = {
   config: [
     {
@@ -25,7 +25,7 @@ const BULLET_NUMBERING = {
           alignment: AlignmentType.LEFT,
           style: {
             paragraph: {
-              indent: { left: convertInchesToTwip(0.25), hanging: convertInchesToTwip(0.25) },
+              indent: { left: convertInchesToTwip(0.3), hanging: convertInchesToTwip(0.15) },
             },
           },
         },
@@ -34,37 +34,36 @@ const BULLET_NUMBERING = {
   ],
 };
 
+// 11pt = 22 half-points (standard resume body size)
+const BODY_SIZE = 22;
+const SMALL_SIZE = 20;
+const NAME_SIZE = 52;
+const CONTACT_SIZE = 19;
+const SECTION_SIZE = 22;
+
 function bullet(text: string): Paragraph {
   return new Paragraph({
-    text,
     numbering: { reference: 'bullet-list', level: 0 },
-    spacing: { after: 60 },
+    spacing: { after: 40, before: 0 },
+    children: [new TextRun({ text, size: BODY_SIZE })],
   });
 }
 
 function sectionHeading(text: string): Paragraph {
   return new Paragraph({
-    text: text.toUpperCase(),
-    heading: HeadingLevel.HEADING_2,
-    spacing: { before: 240, after: 80 },
+    spacing: { before: 200, after: 80 },
     border: {
-      bottom: { style: BorderStyle.SINGLE, size: 6, color: '1F4E79' },
+      bottom: { style: BorderStyle.SINGLE, size: 8, color: '1F4E79' },
     },
     children: [
       new TextRun({
         text: text.toUpperCase(),
         bold: true,
         color: '1F4E79',
-        size: 22,
+        size: SECTION_SIZE,
+        font: 'Calibri',
       }),
     ],
-  });
-}
-
-function divider(): Paragraph {
-  return new Paragraph({
-    text: '',
-    spacing: { after: 60 },
   });
 }
 
@@ -75,79 +74,86 @@ export async function generateResumeDocx(
 ): Promise<Buffer> {
   const children: Paragraph[] = [];
 
-  // Name header
+  // ── Name ──────────────────────────────────────────────────────────────────
   children.push(
     new Paragraph({
       alignment: AlignmentType.CENTER,
-      spacing: { after: 40 },
+      spacing: { after: 60 },
       children: [
         new TextRun({
           text: masterProfile.name,
           bold: true,
-          size: 36,
+          size: NAME_SIZE,
           color: '1F4E79',
+          font: 'Calibri',
         }),
       ],
     })
   );
 
-  // Contact line
+  // ── Contact line ──────────────────────────────────────────────────────────
   children.push(
     new Paragraph({
       alignment: AlignmentType.CENTER,
       spacing: { after: 40 },
       children: [
-        new TextRun({ text: masterProfile.phone, size: 20 }),
-        new TextRun({ text: '  |  ', size: 20, color: '888888' }),
-        new TextRun({ text: masterProfile.email, size: 20 }),
-        new TextRun({ text: '  |  ', size: 20, color: '888888' }),
-        new TextRun({ text: masterProfile.location, size: 20 }),
+        new TextRun({ text: masterProfile.phone, size: CONTACT_SIZE, font: 'Calibri' }),
+        new TextRun({ text: '  ·  ', size: CONTACT_SIZE, color: '888888', font: 'Calibri' }),
+        new TextRun({ text: masterProfile.email, size: CONTACT_SIZE, font: 'Calibri' }),
+        new TextRun({ text: '  ·  ', size: CONTACT_SIZE, color: '888888', font: 'Calibri' }),
+        new TextRun({ text: masterProfile.location, size: CONTACT_SIZE, font: 'Calibri' }),
       ],
     })
   );
 
-  // Links line
+  // ── Links line ────────────────────────────────────────────────────────────
   children.push(
     new Paragraph({
       alignment: AlignmentType.CENTER,
-      spacing: { after: 80 },
+      spacing: { after: 60 },
       children: [
-        new TextRun({ text: masterProfile.portfolio, size: 18, color: '1F4E79' }),
-        new TextRun({ text: '  |  ', size: 18, color: '888888' }),
-        new TextRun({ text: masterProfile.linkedin, size: 18, color: '1F4E79' }),
-        new TextRun({ text: '  |  ', size: 18, color: '888888' }),
-        new TextRun({ text: masterProfile.github, size: 18, color: '1F4E79' }),
+        new TextRun({ text: masterProfile.portfolio, size: CONTACT_SIZE, color: '1F4E79', font: 'Calibri' }),
+        new TextRun({ text: '  ·  ', size: CONTACT_SIZE, color: '888888', font: 'Calibri' }),
+        new TextRun({ text: masterProfile.linkedin, size: CONTACT_SIZE, color: '1F4E79', font: 'Calibri' }),
+        new TextRun({ text: '  ·  ', size: CONTACT_SIZE, color: '888888', font: 'Calibri' }),
+        new TextRun({ text: masterProfile.github, size: CONTACT_SIZE, color: '1F4E79', font: 'Calibri' }),
       ],
     })
   );
 
-  // Work Permit note
+  // ── Work permit ───────────────────────────────────────────────────────────
   children.push(
     new Paragraph({
       alignment: AlignmentType.CENTER,
-      spacing: { after: 200 },
+      spacing: { after: 160 },
       children: [
-        new TextRun({ text: masterProfile.workPermit, size: 18, italics: true, color: '555555' }),
+        new TextRun({
+          text: masterProfile.workPermit,
+          size: CONTACT_SIZE,
+          italics: true,
+          color: '555555',
+          font: 'Calibri',
+        }),
       ],
     })
   );
 
-  // Summary
-  children.push(sectionHeading('Summary'));
+  // ── Summary ───────────────────────────────────────────────────────────────
+  children.push(sectionHeading('Professional Summary'));
   children.push(
     new Paragraph({
-      text: resume.summary,
       spacing: { after: 120 },
+      children: [new TextRun({ text: resume.summary, size: BODY_SIZE, font: 'Calibri' })],
     })
   );
 
-  // Skills
-  children.push(sectionHeading('Skills'));
+  // ── Skills ────────────────────────────────────────────────────────────────
+  children.push(sectionHeading('Technical Skills'));
   const skillGroups: Array<[string, string[]]> = [
     ['Languages', resume.skills.languages],
-    ['Frameworks', resume.skills.frameworks],
+    ['Frameworks & Libraries', resume.skills.frameworks],
     ['Databases', resume.skills.databases],
-    ['Tools', resume.skills.tools],
+    ['Tools & DevOps', resume.skills.tools],
     ['Cloud', resume.skills.cloud],
     ['Platforms', resume.skills.platforms],
     ['Practices', resume.skills.practices],
@@ -158,50 +164,72 @@ export async function generateResumeDocx(
         new Paragraph({
           spacing: { after: 60 },
           children: [
-            new TextRun({ text: `${label}: `, bold: true, size: 20 }),
-            new TextRun({ text: items.join(', '), size: 20 }),
+            new TextRun({ text: `${label}: `, bold: true, size: BODY_SIZE, font: 'Calibri' }),
+            new TextRun({ text: items.join(', '), size: BODY_SIZE, font: 'Calibri' }),
           ],
         })
       );
     }
   }
 
-  // Experience
-  children.push(sectionHeading('Experience'));
+  // ── Experience ────────────────────────────────────────────────────────────
+  children.push(sectionHeading('Professional Experience'));
   for (const exp of resume.experience) {
-    // Job title + dates
+    // Title left, dates right using tab stop
     children.push(
       new Paragraph({
-        spacing: { before: 120, after: 40 },
+        spacing: { before: 140, after: 20 },
+        tabStops: [{ type: TabStopType.RIGHT, position: TabStopPosition.MAX }],
         children: [
-          new TextRun({ text: exp.title, bold: true, size: 22 }),
-          new TextRun({ text: `  |  ${exp.company}`, size: 22, color: '1F4E79' }),
+          new TextRun({ text: exp.title, bold: true, size: BODY_SIZE, font: 'Calibri' }),
+          new TextRun({ text: '\t', size: BODY_SIZE }),
+          new TextRun({
+            text: `${exp.startDate} – ${exp.endDate}`,
+            size: SMALL_SIZE,
+            color: '555555',
+            font: 'Calibri',
+          }),
         ],
       })
     );
-    // Location + dates
+    // Company | Location
     children.push(
       new Paragraph({
-        spacing: { after: 60 },
+        spacing: { after: 80 },
         children: [
           new TextRun({
-            text: `${exp.location}  |  ${exp.startDate} - ${exp.endDate}`,
+            text: exp.company,
+            size: SMALL_SIZE,
             italics: true,
-            size: 18,
+            color: '1F4E79',
+            font: 'Calibri',
+          }),
+          new TextRun({ text: '  ·  ', size: SMALL_SIZE, color: '888888', font: 'Calibri' }),
+          new TextRun({
+            text: exp.location,
+            size: SMALL_SIZE,
+            italics: true,
             color: '666666',
+            font: 'Calibri',
           }),
         ],
       })
     );
 
-    // Projects with bullets
+    // Projects
     if (exp.projects) {
       for (const project of exp.projects) {
         children.push(
           new Paragraph({
             spacing: { before: 80, after: 40 },
             children: [
-              new TextRun({ text: project.name, bold: true, size: 20, color: '333333' }),
+              new TextRun({
+                text: project.name,
+                bold: true,
+                size: SMALL_SIZE,
+                color: '333333',
+                font: 'Calibri',
+              }),
             ],
           })
         );
@@ -211,31 +239,33 @@ export async function generateResumeDocx(
       }
     }
 
-    // General bullets
     if (exp.general) {
-      for (const b of exp.general) {
-        children.push(bullet(b));
-      }
+      for (const b of exp.general) children.push(bullet(b));
     }
-
-    // Simple bullets
     if (exp.bullets) {
-      for (const b of exp.bullets) {
-        children.push(bullet(b));
-      }
+      for (const b of exp.bullets) children.push(bullet(b));
     }
 
-    children.push(divider());
+    // Small gap between jobs
+    children.push(new Paragraph({ spacing: { after: 80 }, children: [] }));
   }
 
-  // Education
+  // ── Education ─────────────────────────────────────────────────────────────
   children.push(sectionHeading('Education'));
   for (const edu of resume.education) {
     children.push(
       new Paragraph({
-        spacing: { before: 80, after: 40 },
+        spacing: { before: 100, after: 20 },
+        tabStops: [{ type: TabStopType.RIGHT, position: TabStopPosition.MAX }],
         children: [
-          new TextRun({ text: edu.degree, bold: true, size: 20 }),
+          new TextRun({ text: edu.degree, bold: true, size: BODY_SIZE, font: 'Calibri' }),
+          new TextRun({ text: '\t', size: BODY_SIZE }),
+          new TextRun({
+            text: `${edu.startDate ? edu.startDate + ' – ' : ''}${edu.endDate}`,
+            size: SMALL_SIZE,
+            color: '555555',
+            font: 'Calibri',
+          }),
         ],
       })
     );
@@ -244,10 +274,11 @@ export async function generateResumeDocx(
         spacing: { after: 60 },
         children: [
           new TextRun({
-            text: `${edu.institution}  |  ${edu.startDate ? edu.startDate + ' - ' : ''}${edu.endDate}`,
+            text: edu.institution,
+            size: SMALL_SIZE,
             italics: true,
-            size: 18,
             color: '666666',
+            font: 'Calibri',
           }),
         ],
       })
@@ -255,8 +286,8 @@ export async function generateResumeDocx(
     if (edu.notes) {
       children.push(
         new Paragraph({
-          text: edu.notes,
-          spacing: { after: 80 },
+          spacing: { after: 60 },
+          children: [new TextRun({ text: edu.notes, size: SMALL_SIZE, font: 'Calibri' })],
         })
       );
     }
@@ -264,14 +295,21 @@ export async function generateResumeDocx(
 
   const doc = new Document({
     numbering: BULLET_NUMBERING,
+    styles: {
+      default: {
+        document: {
+          run: { font: 'Calibri', size: BODY_SIZE },
+        },
+      },
+    },
     sections: [
       {
         properties: {
           page: {
             margin: {
-              top: convertInchesToTwip(0.75),
+              top: convertInchesToTwip(0.7),
               right: convertInchesToTwip(0.75),
-              bottom: convertInchesToTwip(0.75),
+              bottom: convertInchesToTwip(0.7),
               left: convertInchesToTwip(0.75),
             },
           },
@@ -291,31 +329,35 @@ export async function generateCoverLetterDocx(
 ): Promise<Buffer> {
   const children: Paragraph[] = [];
 
-  // Name header
+  // ── Header ────────────────────────────────────────────────────────────────
   children.push(
     new Paragraph({
       spacing: { after: 40 },
       children: [
-        new TextRun({ text: masterProfile.name, bold: true, size: 28, color: '1F4E79' }),
+        new TextRun({
+          text: masterProfile.name,
+          bold: true,
+          size: 36,
+          color: '1F4E79',
+          font: 'Calibri',
+        }),
       ],
     })
   );
-
-  // Contact
   children.push(
     new Paragraph({
       spacing: { after: 40 },
       children: [
-        new TextRun({ text: masterProfile.email, size: 20 }),
-        new TextRun({ text: '  |  ', size: 20, color: '888888' }),
-        new TextRun({ text: masterProfile.phone, size: 20 }),
-        new TextRun({ text: '  |  ', size: 20, color: '888888' }),
-        new TextRun({ text: masterProfile.location, size: 20 }),
+        new TextRun({ text: masterProfile.email, size: SMALL_SIZE, font: 'Calibri' }),
+        new TextRun({ text: '  ·  ', size: SMALL_SIZE, color: '888888', font: 'Calibri' }),
+        new TextRun({ text: masterProfile.phone, size: SMALL_SIZE, font: 'Calibri' }),
+        new TextRun({ text: '  ·  ', size: SMALL_SIZE, color: '888888', font: 'Calibri' }),
+        new TextRun({ text: masterProfile.location, size: SMALL_SIZE, font: 'Calibri' }),
       ],
     })
   );
 
-  // Date
+  // ── Date ──────────────────────────────────────────────────────────────────
   const today = new Date().toLocaleDateString('en-CA', {
     year: 'numeric',
     month: 'long',
@@ -323,47 +365,61 @@ export async function generateCoverLetterDocx(
   });
   children.push(
     new Paragraph({
-      spacing: { before: 200, after: 200 },
-      children: [new TextRun({ text: today, size: 20 })],
+      spacing: { before: 240, after: 240 },
+      children: [new TextRun({ text: today, size: BODY_SIZE, font: 'Calibri' })],
     })
   );
 
-  // Subject line
+  // ── Subject ───────────────────────────────────────────────────────────────
   children.push(
     new Paragraph({
-      spacing: { after: 200 },
+      spacing: { after: 240 },
       children: [
-        new TextRun({ text: `Re: ${jobTitle} at ${companyName}`, bold: true, size: 22 }),
+        new TextRun({
+          text: `Re: ${jobTitle} at ${companyName}`,
+          bold: true,
+          size: BODY_SIZE,
+          font: 'Calibri',
+        }),
       ],
     })
   );
 
-  // Body paragraphs — split on double newline
+  // ── Body ──────────────────────────────────────────────────────────────────
   const paragraphs = coverLetterText.split(/\n{2,}/).filter((p) => p.trim().length > 0);
   for (const para of paragraphs) {
     children.push(
       new Paragraph({
-        text: para.trim(),
         spacing: { after: 200 },
+        children: [new TextRun({ text: para.trim(), size: BODY_SIZE, font: 'Calibri' })],
       })
     );
   }
 
-  // Closing
+  // ── Closing ───────────────────────────────────────────────────────────────
   children.push(
     new Paragraph({
-      spacing: { before: 200, after: 40 },
-      children: [new TextRun({ text: 'Sincerely,', size: 20 })],
+      spacing: { before: 200, after: 60 },
+      children: [new TextRun({ text: 'Sincerely,', size: BODY_SIZE, font: 'Calibri' })],
     })
   );
   children.push(
     new Paragraph({
       spacing: { after: 40 },
-      children: [new TextRun({ text: masterProfile.name, bold: true, size: 20 })],
+      children: [
+        new TextRun({ text: masterProfile.name, bold: true, size: BODY_SIZE, font: 'Calibri' }),
+      ],
     })
   );
 
   const doc = new Document({
+    styles: {
+      default: {
+        document: {
+          run: { font: 'Calibri', size: BODY_SIZE },
+        },
+      },
+    },
     sections: [
       {
         properties: {

@@ -1,12 +1,9 @@
-import Anthropic from '@anthropic-ai/sdk';
+import Groq from 'groq-sdk';
 import { masterProfile } from '@/data/master-profile';
 import { GeneratedResume } from '@/types';
 
-const client = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
-
-const MODEL = 'claude-sonnet-4-20250514';
+const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
+const MODEL = 'llama-3.3-70b-versatile';
 
 export async function generateResume(
   jobTitle: string,
@@ -40,14 +37,17 @@ ${jobDescription}
 Candidate Master Profile:
 ${JSON.stringify(masterProfile, null, 2)}`;
 
-  const message = await client.messages.create({
+  const completion = await client.chat.completions.create({
     model: MODEL,
+    messages: [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: userMessage },
+    ],
     max_tokens: 2000,
-    system: systemPrompt,
-    messages: [{ role: 'user', content: userMessage }],
+    temperature: 0.7,
   });
 
-  const text = message.content[0].type === 'text' ? message.content[0].text : '';
+  const text = completion.choices[0]?.message?.content ?? '';
 
   // Strip any accidental markdown code fences
   const cleaned = text.replace(/^```(?:json)?\n?/i, '').replace(/\n?```$/i, '').trim();
@@ -81,12 +81,15 @@ ${jobDescription}
 Candidate Master Profile:
 ${JSON.stringify(masterProfile, null, 2)}`;
 
-  const message = await client.messages.create({
+  const completion = await client.chat.completions.create({
     model: MODEL,
+    messages: [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: userMessage },
+    ],
     max_tokens: 1000,
-    system: systemPrompt,
-    messages: [{ role: 'user', content: userMessage }],
+    temperature: 0.7,
   });
 
-  return message.content[0].type === 'text' ? message.content[0].text : '';
+  return completion.choices[0]?.message?.content ?? '';
 }

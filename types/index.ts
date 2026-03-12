@@ -86,9 +86,10 @@ export interface GenerateCoverLetterPayload {
   companyName: string;
 }
 
-// Payload for docx download
+// Payload for document download
 export interface DownloadPayload {
   type: 'resume' | 'coverletter';
+  format: 'docx' | 'pdf';
   content: string;
   jobTitle: string;
   companyName: string;
