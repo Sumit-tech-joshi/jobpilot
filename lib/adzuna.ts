@@ -1,6 +1,6 @@
 import { Job } from '@/types';
 
-const ADZUNA_BASE_URL = 'https://api.adzuna.com/v1/api/jobs/ca/search/1';
+const ADZUNA_BASE_URL = 'https://api.adzuna.com/v1/api/jobs/ca/search';
 const APP_ID = process.env.ADZUNA_APP_ID;
 const APP_KEY = process.env.ADZUNA_APP_KEY;
 
@@ -37,10 +37,9 @@ export async function fetchAdzunaJobs(
     what: keyword,
     where: location,
     results_per_page: '10',
-    page: String(page),
   });
 
-  const response = await fetch(`${ADZUNA_BASE_URL}?${params.toString()}`, {
+  const response = await fetch(`${ADZUNA_BASE_URL}/${page}?${params.toString()}`, {
     next: { revalidate: 0 },
   });
 
@@ -51,7 +50,13 @@ export async function fetchAdzunaJobs(
 
   const data: AdzunaResponse = await response.json();
 
-  return (data.results || []).map((item) => {
+  const jobs = (data.results || []);
+  console.log(`\n[Adzuna] query="${keyword}" location="${location}" → ${jobs.length} results`);
+  jobs.forEach((item, i) => {
+    console.log(`  [${i + 1}] ${item.title} @ ${item.company.display_name} (${item.location.display_name})`);
+  });
+
+  return jobs.map((item) => {
     let salary: string | undefined;
     if (item.salary_min && item.salary_max) {
       salary = `$${Math.round(item.salary_min / 1000)}k - $${Math.round(item.salary_max / 1000)}k`;
