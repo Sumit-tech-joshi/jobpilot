@@ -44,11 +44,6 @@ body::before {
   z-index: 0;
 }
 
-/* Ensure content sits above texture */
-body > * {
-  position: relative;
-  z-index: 1;
-}
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {

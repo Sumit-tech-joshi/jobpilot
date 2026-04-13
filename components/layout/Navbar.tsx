@@ -107,7 +107,7 @@ export default function Navbar() {
 
           {/* Dropdown */}
           {menuOpen && (
-            <div className="absolute right-0 top-full mt-2 w-56 bg-[#0D1424] border border-white/[0.07] rounded-xl shadow-xl shadow-black/60 overflow-hidden z-50">
+            <div className="absolute right-0 top-full mt-2 w-56 bg-[#0D1424] border border-white/[0.07] rounded-xl shadow-xl shadow-black/60 overflow-hidden z-[100]">
               {/* User info */}
               <div className="px-4 py-3 border-b border-white/[0.05]">
                 <p className="text-sm font-medium text-white truncate">{session?.user?.name}</p>
