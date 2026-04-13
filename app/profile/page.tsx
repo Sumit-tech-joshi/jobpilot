@@ -116,25 +116,25 @@ function sectionHasData(id: SectionId, p: ProfileData): boolean {
 /* ─────────────────────────────────────────────
    Shared UI
 ───────────────────────────────────────────── */
-const ic = 'w-full px-4 py-3 bg-[#0d1117] border border-[#30363d] hover:border-[#484f58] focus:border-[#1F4E79] focus:ring-2 focus:ring-[#1F4E79]/20 rounded-xl text-white placeholder-[#484f58] outline-none transition-all duration-200 text-sm'
-const sc = 'w-full px-4 py-3 bg-[#0d1117] border border-[#30363d] hover:border-[#484f58] focus:border-[#1F4E79] focus:ring-2 focus:ring-[#1F4E79]/20 rounded-xl text-white outline-none transition-all duration-200 text-sm appearance-none cursor-pointer'
-const tc = 'w-full px-4 py-3 bg-[#0d1117] border border-[#30363d] hover:border-[#484f58] focus:border-[#1F4E79] focus:ring-2 focus:ring-[#1F4E79]/20 rounded-xl text-white placeholder-[#484f58] outline-none transition-all duration-200 text-sm resize-none'
+const ic = 'w-full px-4 py-3 bg-[#080C14] border border-white/[0.08] hover:border-white/[0.15] focus:border-[#6366F1] focus:ring-2 focus:ring-[#6366F1]/20 rounded-xl text-white placeholder-[#475569] outline-none transition-all duration-200 text-sm'
+const sc = 'w-full px-4 py-3 bg-[#080C14] border border-white/[0.08] hover:border-white/[0.15] focus:border-[#6366F1] focus:ring-2 focus:ring-[#6366F1]/20 rounded-xl text-white outline-none transition-all duration-200 text-sm appearance-none cursor-pointer'
+const tc = 'w-full px-4 py-3 bg-[#080C14] border border-white/[0.08] hover:border-white/[0.15] focus:border-[#6366F1] focus:ring-2 focus:ring-[#6366F1]/20 rounded-xl text-white placeholder-[#475569] outline-none transition-all duration-200 text-sm resize-none'
 
 function Field({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
   return (
     <div>
-      <label className="block text-xs font-medium text-[#8b949e] uppercase tracking-wider mb-2">{label}</label>
+      <label className="block text-xs font-medium text-[#94A3B8] uppercase tracking-wider mb-2">{label}</label>
       {children}
-      {hint && <p className="text-[#484f58] text-xs mt-1.5">{hint}</p>}
+      {hint && <p className="text-[#475569] text-xs mt-1.5">{hint}</p>}
     </div>
   )
 }
 
 function SectionHeader({ title, description }: { title: string; description: string }) {
   return (
-    <div className="mb-6 pb-5 border-b border-[#21262d]">
+    <div className="mb-6 pb-5 border-b border-white/[0.05]">
       <h2 className="text-xl font-bold text-white mb-1">{title}</h2>
-      <p className="text-[#8b949e] text-sm">{description}</p>
+      <p className="text-[#94A3B8] text-sm">{description}</p>
     </div>
   )
 }
@@ -145,10 +145,10 @@ function SaveButton({ state, onClick }: { state: SaveState; onClick: () => void 
       onClick={onClick}
       disabled={state === 'saving'}
       className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-        state === 'saving' ? 'bg-[#1F4E79]/50 text-white/50 cursor-not-allowed' :
+        state === 'saving' ? 'opacity-50 cursor-not-allowed bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] text-white' :
         state === 'saved'  ? 'bg-emerald-500/20 border border-emerald-500/40 text-emerald-400' :
         state === 'error'  ? 'bg-red-500/20 border border-red-500/40 text-red-400' :
-        'bg-[#1F4E79] hover:bg-[#2563a8] text-white'
+        'bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] hover:opacity-90 text-white shadow-lg shadow-[#6366F1]/20'
       }`}
     >
       {state === 'saving' && <span className="w-3.5 h-3.5 border-2 border-white/20 border-t-white rounded-full animate-spin" />}
@@ -172,18 +172,18 @@ function TagInput({ tags, onChange, placeholder = 'Type and press Enter' }: { ta
     if (e.key === 'Backspace' && !val && tags.length) onChange(tags.slice(0, -1))
   }
   return (
-    <div className="bg-[#0d1117] border border-[#30363d] hover:border-[#484f58] focus-within:border-[#1F4E79] focus-within:ring-2 focus-within:ring-[#1F4E79]/20 rounded-xl p-3 transition-all duration-200 min-h-[48px]">
+    <div className="bg-[#080C14] border border-white/[0.08] hover:border-white/[0.15] focus-within:border-[#6366F1] focus-within:ring-2 focus-within:ring-[#6366F1]/20 rounded-xl p-3 transition-all duration-200 min-h-[48px]">
       <div className="flex flex-wrap gap-2 mb-2">
         {tags.map(t => (
-          <span key={t} className="flex items-center gap-1.5 px-2.5 py-1 bg-[#1F4E79]/20 border border-[#1F4E79]/40 text-[#79b8ff] rounded-lg text-xs">
+          <span key={t} className="flex items-center gap-1.5 px-2.5 py-1 bg-[#6366F1]/10 border border-[#6366F1]/30 text-[#818CF8] rounded-lg text-xs">
             {t}
-            <button onClick={() => remove(t)} className="text-[#4a9eda]/60 hover:text-red-400 transition-colors">
+            <button onClick={() => remove(t)} className="text-[#6366F1]/60 hover:text-red-400 transition-colors">
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
           </span>
         ))}
       </div>
-      <input value={val} onChange={e => setVal(e.target.value)} onKeyDown={onKey} placeholder={tags.length === 0 ? placeholder : '+ add more'} className="bg-transparent text-white placeholder-[#484f58] text-sm outline-none w-full" />
+      <input value={val} onChange={e => setVal(e.target.value)} onKeyDown={onKey} placeholder={tags.length === 0 ? placeholder : '+ add more'} className="bg-transparent text-white placeholder-[#475569] text-sm outline-none w-full" />
     </div>
   )
 }
@@ -239,11 +239,11 @@ export default function ProfilePage() {
     return (
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="animate-pulse space-y-4">
-          <div className="h-8 bg-[#161b22] rounded-xl w-48" />
-          <div className="h-2 bg-[#161b22] rounded-full w-full" />
+          <div className="h-8 bg-white/[0.04] rounded-xl w-48" />
+          <div className="h-2 bg-white/[0.04] rounded-full w-full" />
           <div className="flex gap-6 mt-8">
-            <div className="w-56 h-96 bg-[#161b22] rounded-2xl shrink-0" />
-            <div className="flex-1 h-96 bg-[#161b22] rounded-2xl" />
+            <div className="w-56 h-96 bg-white/[0.02] rounded-2xl shrink-0" />
+            <div className="flex-1 h-96 bg-white/[0.02] rounded-2xl" />
           </div>
         </div>
       </div>
@@ -257,13 +257,13 @@ export default function ProfilePage() {
         <div className="flex items-start justify-between mb-4">
           <div>
             <h1 className="text-2xl font-bold text-white">My Profile</h1>
-            <p className="text-[#8b949e] text-sm mt-1">
+            <p className="text-[#94A3B8] text-sm mt-1">
               {session?.user?.name} · Keep this updated for the best AI-generated documents
             </p>
           </div>
           <Link
             href="/generate"
-            className="hidden md:flex items-center gap-2 px-4 py-2.5 bg-[#1F4E79]/20 hover:bg-[#1F4E79]/30 border border-[#1F4E79]/40 text-[#4a9eda] rounded-xl text-sm font-medium transition-all"
+            className="hidden md:flex items-center gap-2 px-4 py-2.5 bg-[#6366F1]/10 hover:bg-[#6366F1]/20 border border-[#6366F1]/30 text-[#8B5CF6] rounded-xl text-sm font-medium transition-all"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
             Generate Resume
@@ -271,26 +271,26 @@ export default function ProfilePage() {
         </div>
 
         {/* Completion bar */}
-        <div className="bg-[#161b22] border border-[#30363d] rounded-2xl p-4">
+        <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-4">
           <div className="flex items-center justify-between mb-2.5">
-            <span className="text-sm text-[#c9d1d9] font-medium">Profile completion</span>
-            <span className="text-sm font-bold" style={{ color: completion >= 75 ? '#3fb950' : completion >= 40 ? '#e3b341' : '#4a9eda' }}>
+            <span className="text-sm text-[#CBD5E1] font-medium">Profile completion</span>
+            <span className="text-sm font-bold" style={{ color: completion >= 75 ? '#34D399' : completion >= 40 ? '#FCD34D' : '#8B5CF6' }}>
               {completion}%
             </span>
           </div>
-          <div className="h-2 bg-[#21262d] rounded-full overflow-hidden">
+          <div className="h-2 bg-white/[0.05] rounded-full overflow-hidden">
             <div
               className="h-full rounded-full transition-all duration-700"
               style={{
                 width: `${completion}%`,
                 background: completion >= 75 ? 'linear-gradient(90deg,#238636,#3fb950)' :
                             completion >= 40 ? 'linear-gradient(90deg,#9e6a03,#e3b341)' :
-                            'linear-gradient(90deg,#1F4E79,#4a9eda)',
+                            'linear-gradient(90deg,#6366F1,#8B5CF6)',
               }}
             />
           </div>
           {completion < 100 && (
-            <p className="text-[#484f58] text-xs mt-2">
+            <p className="text-[#475569] text-xs mt-2">
               {completion < 40 ? 'Add your experience and education to get started.' :
                completion < 75 ? 'Looking good — add a summary and skills to improve results.' :
                'Almost there — fill in Additional Info to reach 100%.'}
@@ -307,8 +307,8 @@ export default function ProfilePage() {
             onClick={() => setActiveSection(s.id)}
             className={`shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium transition-all ${
               activeSection === s.id
-                ? 'bg-[#1F4E79]/20 border border-[#1F4E79]/50 text-[#4a9eda]'
-                : 'bg-[#161b22] border border-[#30363d] text-[#8b949e]'
+                ? 'bg-[#6366F1]/10 border border-[#6366F1]/30 text-[#8B5CF6]'
+                : 'bg-white/[0.02] border border-white/[0.06] text-[#94A3B8]'
             }`}
           >
             <span className="w-3.5 h-3.5">{s.icon}</span>
@@ -324,7 +324,7 @@ export default function ProfilePage() {
       <div className="flex gap-6 items-start">
         {/* ── Sidebar (desktop) ── */}
         <aside className="hidden md:flex flex-col w-56 shrink-0 sticky top-24">
-          <nav className="bg-[#161b22] border border-[#30363d] rounded-2xl overflow-hidden">
+          <nav className="bg-white/[0.02] border border-white/[0.06] rounded-2xl overflow-hidden">
             {SECTIONS.map((s, i) => {
               const active = activeSection === s.id
               const filled = sectionHasData(s.id, profile)
@@ -333,12 +333,12 @@ export default function ProfilePage() {
                   key={s.id}
                   onClick={() => setActiveSection(s.id)}
                   className={`w-full flex items-center gap-3 px-4 py-3 text-sm text-left transition-all duration-150 ${
-                    i < SECTIONS.length - 1 ? 'border-b border-[#21262d]' : ''
-                  } ${active ? 'bg-[#1F4E79]/15 text-[#4a9eda]' : 'text-[#8b949e] hover:bg-white/[0.04] hover:text-[#c9d1d9]'}`}
+                    i < SECTIONS.length - 1 ? 'border-b border-white/[0.05]' : ''
+                  } ${active ? 'bg-[#6366F1]/10 text-[#8B5CF6]' : 'text-[#94A3B8] hover:bg-white/[0.04] hover:text-white'}`}
                 >
-                  <span className={`w-4 h-4 shrink-0 ${active ? 'text-[#4a9eda]' : 'text-[#484f58]'}`}>{s.icon}</span>
+                  <span className={`w-4 h-4 shrink-0 ${active ? 'text-[#8B5CF6]' : 'text-[#475569]'}`}>{s.icon}</span>
                   <span className="flex-1 font-medium leading-tight">{s.label}</span>
-                  <span className={`w-2 h-2 rounded-full shrink-0 transition-colors ${filled ? 'bg-emerald-500' : 'bg-[#30363d]'}`} />
+                  <span className={`w-2 h-2 rounded-full shrink-0 transition-colors ${filled ? 'bg-emerald-500' : 'bg-white/[0.1]'}`} />
                 </button>
               )
             })}
@@ -347,7 +347,7 @@ export default function ProfilePage() {
 
         {/* ── Section content ── */}
         <div className="flex-1 min-w-0">
-          <div className="bg-[#161b22] border border-[#30363d] rounded-2xl p-6 md:p-8">
+          <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 md:p-8">
             {activeSection === 'personal'       && <PersonalSection       profile={profile} onChange={onProfileChange} />}
             {activeSection === 'summary'        && <SummarySection        profile={profile} onChange={onProfileChange} />}
             {activeSection === 'experience'     && <ExperienceSection     profile={profile} onChange={onProfileChange} />}
@@ -392,8 +392,8 @@ function PersonalSection({ profile, onChange }: { profile: ProfileData; onChange
             </select>
           </Field>
         </div>
-        <div className="pt-2 border-t border-[#21262d]">
-          <p className="text-xs text-[#484f58] uppercase tracking-wider font-medium mb-4">Online presence (optional)</p>
+        <div className="pt-2 border-t border-white/[0.05]">
+          <p className="text-xs text-[#475569] uppercase tracking-wider font-medium mb-4">Online presence (optional)</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <Field label="LinkedIn URL"><input className={ic} value={d.linkedin} onChange={e => p('linkedin')(e.target.value)} placeholder="linkedin.com/in/yourname" /></Field>
             <Field label="Portfolio / website"><input className={ic} value={d.portfolio} onChange={e => p('portfolio')(e.target.value)} placeholder="yoursite.com" /></Field>
@@ -402,7 +402,7 @@ function PersonalSection({ profile, onChange }: { profile: ProfileData; onChange
           </div>
         </div>
       </div>
-      <div className="flex justify-end mt-6 pt-5 border-t border-[#21262d]">
+      <div className="flex justify-end mt-6 pt-5 border-t border-white/[0.05]">
         <SaveButton state={state} onClick={() => save(d)} />
       </div>
     </div>
@@ -422,9 +422,9 @@ function SummarySection({ profile, onChange }: { profile: ProfileData; onChange:
         <textarea className={tc} rows={5} value={summary} onChange={e => setSummary(e.target.value)} placeholder="Results-oriented professional with X years of experience in..." />
       </Field>
       <div className="flex items-center justify-between mt-1.5">
-        <span className={`text-xs ${summary.length > 600 ? 'text-red-400' : 'text-[#484f58]'}`}>{summary.length} characters</span>
+        <span className={`text-xs ${summary.length > 600 ? 'text-red-400' : 'text-[#475569]'}`}>{summary.length} characters</span>
       </div>
-      <div className="flex justify-end mt-5 pt-5 border-t border-[#21262d]">
+      <div className="flex justify-end mt-5 pt-5 border-t border-white/[0.05]">
         <SaveButton state={state} onClick={() => save({ summary })} />
       </div>
     </div>
@@ -458,9 +458,9 @@ function ExperienceSection({ profile, onChange }: { profile: ProfileData; onChan
       <SectionHeader title="Experience" description="List your roles in reverse chronological order." />
       <div className="space-y-3 mb-5">
         {items.length === 0 && (
-          <div className="text-center py-10 border border-dashed border-[#30363d] rounded-2xl">
-            <p className="text-[#484f58] text-sm mb-3">No experience entries yet.</p>
-            <button onClick={add} className="text-[#4a9eda] text-sm hover:text-[#79b8ff] transition-colors">+ Add your first role</button>
+          <div className="text-center py-10 border border-dashed border-white/[0.07] rounded-2xl">
+            <p className="text-[#475569] text-sm mb-3">No experience entries yet.</p>
+            <button onClick={add} className="text-[#8B5CF6] text-sm hover:text-[#A78BFA] transition-colors">+ Add your first role</button>
           </div>
         )}
         {items.map(item => (
@@ -475,11 +475,11 @@ function ExperienceSection({ profile, onChange }: { profile: ProfileData; onChan
         ))}
       </div>
       {items.length > 0 && (
-        <button onClick={add} className="w-full py-3 border border-dashed border-[#30363d] hover:border-[#1F4E79]/50 hover:bg-[#1F4E79]/5 rounded-xl text-[#8b949e] hover:text-[#4a9eda] text-sm transition-all duration-200 mb-5">
+        <button onClick={add} className="w-full py-3 border border-dashed border-white/[0.08] hover:border-[#6366F1]/40 hover:bg-[#6366F1]/5 rounded-xl text-[#94A3B8] hover:text-[#8B5CF6] text-sm transition-all duration-200 mb-5">
           + Add another role
         </button>
       )}
-      <div className="flex justify-end pt-5 border-t border-[#21262d]">
+      <div className="flex justify-end pt-5 border-t border-white/[0.05]">
         <SaveButton state={state} onClick={() => save({ experience: items })} />
       </div>
     </div>
@@ -491,25 +491,25 @@ function ExperienceCard({ item, expanded, onToggle, onUpdate, onDelete }: {
   onToggle: () => void; onUpdate: (f: Partial<Experience>) => void; onDelete: () => void
 }) {
   return (
-    <div className="border border-[#30363d] rounded-xl overflow-hidden">
+    <div className="border border-white/[0.06] rounded-xl overflow-hidden">
       {/* Header row */}
-      <div className={`flex items-center gap-3 px-4 py-3.5 cursor-pointer transition-colors ${expanded ? 'bg-[#1F4E79]/10' : 'hover:bg-white/[0.03]'}`} onClick={onToggle}>
+      <div className={`flex items-center gap-3 px-4 py-3.5 cursor-pointer transition-colors ${expanded ? 'bg-[#6366F1]/05' : 'hover:bg-white/[0.03]'}`} onClick={onToggle}>
         <div className="flex-1 min-w-0">
-          <p className="text-white text-sm font-medium truncate">{item.jobTitle || <span className="text-[#484f58]">Job title</span>}</p>
-          <p className="text-[#8b949e] text-xs truncate mt-0.5">
+          <p className="text-white text-sm font-medium truncate">{item.jobTitle || <span className="text-[#475569]">Job title</span>}</p>
+          <p className="text-[#94A3B8] text-xs truncate mt-0.5">
             {item.employer || 'Employer'}{item.location ? ` · ${item.location}` : ''}{item.startDate ? ` · ${item.startDate} – ${item.currentRole ? 'Present' : item.endDate || '?'}` : ''}
           </p>
         </div>
         <div className="flex items-center gap-2 shrink-0">
-          <button onClick={e => { e.stopPropagation(); onDelete() }} className="p-1.5 text-[#484f58] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all">
+          <button onClick={e => { e.stopPropagation(); onDelete() }} className="p-1.5 text-[#475569] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all">
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
           </button>
-          <svg className={`w-4 h-4 text-[#484f58] transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+          <svg className={`w-4 h-4 text-[#475569] transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
         </div>
       </div>
       {/* Edit form */}
       {expanded && (
-        <div className="px-4 pb-5 pt-4 border-t border-[#21262d] space-y-4">
+        <div className="px-4 pb-5 pt-4 border-t border-white/[0.05] space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Field label="Job title"><input className={ic} value={item.jobTitle} onChange={e => onUpdate({ jobTitle: e.target.value })} placeholder="e.g. Software Developer" /></Field>
             <Field label="Employer"><input className={ic} value={item.employer} onChange={e => onUpdate({ employer: e.target.value })} placeholder="Company name" /></Field>
@@ -564,27 +564,27 @@ function EducationSection({ profile, onChange }: { profile: ProfileData; onChang
       <SectionHeader title="Education" description="Degrees, diplomas, trade certificates, bootcamps — anything goes." />
       <div className="space-y-3 mb-5">
         {items.length === 0 && (
-          <div className="text-center py-10 border border-dashed border-[#30363d] rounded-2xl">
-            <p className="text-[#484f58] text-sm mb-3">No education entries yet.</p>
-            <button onClick={add} className="text-[#4a9eda] text-sm hover:text-[#79b8ff] transition-colors">+ Add your first qualification</button>
+          <div className="text-center py-10 border border-dashed border-white/[0.07] rounded-2xl">
+            <p className="text-[#475569] text-sm mb-3">No education entries yet.</p>
+            <button onClick={add} className="text-[#8B5CF6] text-sm hover:text-[#A78BFA] transition-colors">+ Add your first qualification</button>
           </div>
         )}
         {items.map(item => (
-          <div key={item.id} className="border border-[#30363d] rounded-xl overflow-hidden">
-            <div className={`flex items-center gap-3 px-4 py-3.5 cursor-pointer transition-colors ${expandedId === item.id ? 'bg-[#1F4E79]/10' : 'hover:bg-white/[0.03]'}`} onClick={() => setExpandedId(expandedId === item.id ? null : item.id)}>
+          <div key={item.id} className="border border-white/[0.06] rounded-xl overflow-hidden">
+            <div className={`flex items-center gap-3 px-4 py-3.5 cursor-pointer transition-colors ${expandedId === item.id ? 'bg-[#6366F1]/05' : 'hover:bg-white/[0.03]'}`} onClick={() => setExpandedId(expandedId === item.id ? null : item.id)}>
               <div className="flex-1 min-w-0">
-                <p className="text-white text-sm font-medium truncate">{item.credential || <span className="text-[#484f58]">Credential</span>}</p>
-                <p className="text-[#8b949e] text-xs truncate mt-0.5">{item.institution || 'Institution'}{item.fieldOfStudy ? ` · ${item.fieldOfStudy}` : ''}{item.endDate ? ` · ${item.endDate}` : ''}</p>
+                <p className="text-white text-sm font-medium truncate">{item.credential || <span className="text-[#475569]">Credential</span>}</p>
+                <p className="text-[#94A3B8] text-xs truncate mt-0.5">{item.institution || 'Institution'}{item.fieldOfStudy ? ` · ${item.fieldOfStudy}` : ''}{item.endDate ? ` · ${item.endDate}` : ''}</p>
               </div>
               <div className="flex items-center gap-2 shrink-0">
-                <button onClick={e => { e.stopPropagation(); remove(item.id) }} className="p-1.5 text-[#484f58] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all">
+                <button onClick={e => { e.stopPropagation(); remove(item.id) }} className="p-1.5 text-[#475569] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all">
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                 </button>
-                <svg className={`w-4 h-4 text-[#484f58] transition-transform duration-200 ${expandedId === item.id ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                <svg className={`w-4 h-4 text-[#475569] transition-transform duration-200 ${expandedId === item.id ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
               </div>
             </div>
             {expandedId === item.id && (
-              <div className="px-4 pb-5 pt-4 border-t border-[#21262d] space-y-4">
+              <div className="px-4 pb-5 pt-4 border-t border-white/[0.05] space-y-4">
                 <Field label="Credential / qualification"><input className={ic} value={item.credential} onChange={e => update(item.id, { credential: e.target.value })} placeholder="e.g. Bachelor of Science, Red Seal Certificate" /></Field>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Field label="Institution"><input className={ic} value={item.institution} onChange={e => update(item.id, { institution: e.target.value })} placeholder="University or college name" /></Field>
@@ -605,11 +605,11 @@ function EducationSection({ profile, onChange }: { profile: ProfileData; onChang
         ))}
       </div>
       {items.length > 0 && (
-        <button onClick={add} className="w-full py-3 border border-dashed border-[#30363d] hover:border-[#1F4E79]/50 hover:bg-[#1F4E79]/5 rounded-xl text-[#8b949e] hover:text-[#4a9eda] text-sm transition-all duration-200 mb-5">
+        <button onClick={add} className="w-full py-3 border border-dashed border-white/[0.08] hover:border-[#6366F1]/40 hover:bg-[#6366F1]/5 rounded-xl text-[#94A3B8] hover:text-[#8B5CF6] text-sm transition-all duration-200 mb-5">
           + Add another qualification
         </button>
       )}
-      <div className="flex justify-end pt-5 border-t border-[#21262d]">
+      <div className="flex justify-end pt-5 border-t border-white/[0.05]">
         <SaveButton state={state} onClick={() => save({ education: items })} />
       </div>
     </div>
@@ -636,13 +636,13 @@ function SkillsSection({ profile, onChange }: { profile: ProfileData; onChange: 
       <SectionHeader title="Skills" description="Organise your skills into categories. Each category appears as its own section on your resume." />
       <div className="space-y-4 mb-5">
         {cats.length === 0 && (
-          <div className="text-center py-10 border border-dashed border-[#30363d] rounded-2xl">
-            <p className="text-[#484f58] text-sm mb-3">No skill categories yet.</p>
-            <button onClick={addCat} className="text-[#4a9eda] text-sm hover:text-[#79b8ff] transition-colors">+ Add your first category</button>
+          <div className="text-center py-10 border border-dashed border-white/[0.07] rounded-2xl">
+            <p className="text-[#475569] text-sm mb-3">No skill categories yet.</p>
+            <button onClick={addCat} className="text-[#8B5CF6] text-sm hover:text-[#A78BFA] transition-colors">+ Add your first category</button>
           </div>
         )}
         {cats.map(cat => (
-          <div key={cat.id} className="border border-[#30363d] rounded-xl p-4 space-y-3">
+          <div key={cat.id} className="border border-white/[0.06] rounded-xl p-4 space-y-3">
             <div className="flex items-center gap-3">
               <input
                 className={`${ic} flex-1`}
@@ -650,7 +650,7 @@ function SkillsSection({ profile, onChange }: { profile: ProfileData; onChange: 
                 onChange={e => updateCat(cat.id, { categoryName: e.target.value })}
                 placeholder="Category name — e.g. Technical Skills, Tools, Soft Skills"
               />
-              <button onClick={() => removeCat(cat.id)} className="p-2 text-[#484f58] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all shrink-0">
+              <button onClick={() => removeCat(cat.id)} className="p-2 text-[#475569] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all shrink-0">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
               </button>
             </div>
@@ -659,11 +659,11 @@ function SkillsSection({ profile, onChange }: { profile: ProfileData; onChange: 
         ))}
       </div>
       {cats.length > 0 && (
-        <button onClick={addCat} className="w-full py-3 border border-dashed border-[#30363d] hover:border-[#1F4E79]/50 hover:bg-[#1F4E79]/5 rounded-xl text-[#8b949e] hover:text-[#4a9eda] text-sm transition-all duration-200 mb-5">
+        <button onClick={addCat} className="w-full py-3 border border-dashed border-white/[0.08] hover:border-[#6366F1]/40 hover:bg-[#6366F1]/5 rounded-xl text-[#94A3B8] hover:text-[#8B5CF6] text-sm transition-all duration-200 mb-5">
           + Add another category
         </button>
       )}
-      <div className="flex justify-end pt-5 border-t border-[#21262d]">
+      <div className="flex justify-end pt-5 border-t border-white/[0.05]">
         <SaveButton state={state} onClick={() => save({ skillCategories: cats })} />
       </div>
     </div>
@@ -691,27 +691,27 @@ function CertificationsSection({ profile, onChange }: { profile: ProfileData; on
       <SectionHeader title="Certifications & Licences" description="Professional certifications, licences, trade credentials — anything that shows qualification." />
       <div className="space-y-3 mb-5">
         {items.length === 0 && (
-          <div className="text-center py-10 border border-dashed border-[#30363d] rounded-2xl">
-            <p className="text-[#484f58] text-sm mb-3">No certifications added yet.</p>
-            <button onClick={add} className="text-[#4a9eda] text-sm hover:text-[#79b8ff] transition-colors">+ Add a certification</button>
+          <div className="text-center py-10 border border-dashed border-white/[0.07] rounded-2xl">
+            <p className="text-[#475569] text-sm mb-3">No certifications added yet.</p>
+            <button onClick={add} className="text-[#8B5CF6] text-sm hover:text-[#A78BFA] transition-colors">+ Add a certification</button>
           </div>
         )}
         {items.map(item => (
-          <div key={item.id} className="border border-[#30363d] rounded-xl overflow-hidden">
-            <div className={`flex items-center gap-3 px-4 py-3.5 cursor-pointer transition-colors ${expandedId === item.id ? 'bg-[#1F4E79]/10' : 'hover:bg-white/[0.03]'}`} onClick={() => setExpandedId(expandedId === item.id ? null : item.id)}>
+          <div key={item.id} className="border border-white/[0.06] rounded-xl overflow-hidden">
+            <div className={`flex items-center gap-3 px-4 py-3.5 cursor-pointer transition-colors ${expandedId === item.id ? 'bg-[#6366F1]/05' : 'hover:bg-white/[0.03]'}`} onClick={() => setExpandedId(expandedId === item.id ? null : item.id)}>
               <div className="flex-1 min-w-0">
-                <p className="text-white text-sm font-medium truncate">{item.name || <span className="text-[#484f58]">Certification name</span>}</p>
-                <p className="text-[#8b949e] text-xs truncate mt-0.5">{item.issuingBody || 'Issuing body'}{item.issueDate ? ` · ${item.issueDate}` : ''}</p>
+                <p className="text-white text-sm font-medium truncate">{item.name || <span className="text-[#475569]">Certification name</span>}</p>
+                <p className="text-[#94A3B8] text-xs truncate mt-0.5">{item.issuingBody || 'Issuing body'}{item.issueDate ? ` · ${item.issueDate}` : ''}</p>
               </div>
               <div className="flex items-center gap-2 shrink-0">
-                <button onClick={e => { e.stopPropagation(); remove(item.id) }} className="p-1.5 text-[#484f58] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all">
+                <button onClick={e => { e.stopPropagation(); remove(item.id) }} className="p-1.5 text-[#475569] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all">
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                 </button>
-                <svg className={`w-4 h-4 text-[#484f58] transition-transform duration-200 ${expandedId === item.id ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                <svg className={`w-4 h-4 text-[#475569] transition-transform duration-200 ${expandedId === item.id ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
               </div>
             </div>
             {expandedId === item.id && (
-              <div className="px-4 pb-5 pt-4 border-t border-[#21262d] space-y-4">
+              <div className="px-4 pb-5 pt-4 border-t border-white/[0.05] space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Field label="Certification name"><input className={ic} value={item.name} onChange={e => update(item.id, { name: e.target.value })} placeholder="e.g. AWS Solutions Architect, Red Seal" /></Field>
                   <Field label="Issuing organisation"><input className={ic} value={item.issuingBody} onChange={e => update(item.id, { issuingBody: e.target.value })} placeholder="e.g. Amazon, ITA BC" /></Field>
@@ -727,11 +727,11 @@ function CertificationsSection({ profile, onChange }: { profile: ProfileData; on
         ))}
       </div>
       {items.length > 0 && (
-        <button onClick={add} className="w-full py-3 border border-dashed border-[#30363d] hover:border-[#1F4E79]/50 hover:bg-[#1F4E79]/5 rounded-xl text-[#8b949e] hover:text-[#4a9eda] text-sm transition-all duration-200 mb-5">
+        <button onClick={add} className="w-full py-3 border border-dashed border-white/[0.08] hover:border-[#6366F1]/40 hover:bg-[#6366F1]/5 rounded-xl text-[#94A3B8] hover:text-[#8B5CF6] text-sm transition-all duration-200 mb-5">
           + Add another certification
         </button>
       )}
-      <div className="flex justify-end pt-5 border-t border-[#21262d]">
+      <div className="flex justify-end pt-5 border-t border-white/[0.05]">
         <SaveButton state={state} onClick={() => save({ certifications: items })} />
       </div>
     </div>
@@ -759,27 +759,27 @@ function ProjectsSection({ profile, onChange }: { profile: ProfileData; onChange
       <SectionHeader title="Projects & Portfolio" description="Personal projects, freelance work, open-source contributions, or notable work samples." />
       <div className="space-y-3 mb-5">
         {items.length === 0 && (
-          <div className="text-center py-10 border border-dashed border-[#30363d] rounded-2xl">
-            <p className="text-[#484f58] text-sm mb-3">No projects added yet.</p>
-            <button onClick={add} className="text-[#4a9eda] text-sm hover:text-[#79b8ff] transition-colors">+ Add a project</button>
+          <div className="text-center py-10 border border-dashed border-white/[0.07] rounded-2xl">
+            <p className="text-[#475569] text-sm mb-3">No projects added yet.</p>
+            <button onClick={add} className="text-[#8B5CF6] text-sm hover:text-[#A78BFA] transition-colors">+ Add a project</button>
           </div>
         )}
         {items.map(item => (
-          <div key={item.id} className="border border-[#30363d] rounded-xl overflow-hidden">
-            <div className={`flex items-center gap-3 px-4 py-3.5 cursor-pointer transition-colors ${expandedId === item.id ? 'bg-[#1F4E79]/10' : 'hover:bg-white/[0.03]'}`} onClick={() => setExpandedId(expandedId === item.id ? null : item.id)}>
+          <div key={item.id} className="border border-white/[0.06] rounded-xl overflow-hidden">
+            <div className={`flex items-center gap-3 px-4 py-3.5 cursor-pointer transition-colors ${expandedId === item.id ? 'bg-[#6366F1]/05' : 'hover:bg-white/[0.03]'}`} onClick={() => setExpandedId(expandedId === item.id ? null : item.id)}>
               <div className="flex-1 min-w-0">
-                <p className="text-white text-sm font-medium truncate">{item.name || <span className="text-[#484f58]">Project name</span>}</p>
-                <p className="text-[#8b949e] text-xs truncate mt-0.5">{item.role || 'Your role'}{item.techOrTools.length ? ` · ${item.techOrTools.slice(0, 3).join(', ')}` : ''}</p>
+                <p className="text-white text-sm font-medium truncate">{item.name || <span className="text-[#475569]">Project name</span>}</p>
+                <p className="text-[#94A3B8] text-xs truncate mt-0.5">{item.role || 'Your role'}{item.techOrTools.length ? ` · ${item.techOrTools.slice(0, 3).join(', ')}` : ''}</p>
               </div>
               <div className="flex items-center gap-2 shrink-0">
-                <button onClick={e => { e.stopPropagation(); remove(item.id) }} className="p-1.5 text-[#484f58] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all">
+                <button onClick={e => { e.stopPropagation(); remove(item.id) }} className="p-1.5 text-[#475569] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all">
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                 </button>
-                <svg className={`w-4 h-4 text-[#484f58] transition-transform duration-200 ${expandedId === item.id ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                <svg className={`w-4 h-4 text-[#475569] transition-transform duration-200 ${expandedId === item.id ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
               </div>
             </div>
             {expandedId === item.id && (
-              <div className="px-4 pb-5 pt-4 border-t border-[#21262d] space-y-4">
+              <div className="px-4 pb-5 pt-4 border-t border-white/[0.05] space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Field label="Project name"><input className={ic} value={item.name} onChange={e => update(item.id, { name: e.target.value })} placeholder="e.g. E-Commerce Platform" /></Field>
                   <Field label="Your role"><input className={ic} value={item.role} onChange={e => update(item.id, { role: e.target.value })} placeholder="e.g. Lead Developer, Designer" /></Field>
@@ -798,11 +798,11 @@ function ProjectsSection({ profile, onChange }: { profile: ProfileData; onChange
         ))}
       </div>
       {items.length > 0 && (
-        <button onClick={add} className="w-full py-3 border border-dashed border-[#30363d] hover:border-[#1F4E79]/50 hover:bg-[#1F4E79]/5 rounded-xl text-[#8b949e] hover:text-[#4a9eda] text-sm transition-all duration-200 mb-5">
+        <button onClick={add} className="w-full py-3 border border-dashed border-white/[0.08] hover:border-[#6366F1]/40 hover:bg-[#6366F1]/5 rounded-xl text-[#94A3B8] hover:text-[#8B5CF6] text-sm transition-all duration-200 mb-5">
           + Add another project
         </button>
       )}
-      <div className="flex justify-end pt-5 border-t border-[#21262d]">
+      <div className="flex justify-end pt-5 border-t border-white/[0.05]">
         <SaveButton state={state} onClick={() => save({ projects: items })} />
       </div>
     </div>
@@ -837,11 +837,11 @@ function LanguagesVolunteerSection({ profile, onChange }: { profile: ProfileData
       {/* Languages */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
-          <p className="text-sm font-semibold text-[#c9d1d9]">Languages spoken</p>
-          <button onClick={addLang} className="text-xs text-[#4a9eda] hover:text-[#79b8ff] transition-colors">+ Add language</button>
+          <p className="text-sm font-semibold text-[#CBD5E1]">Languages spoken</p>
+          <button onClick={addLang} className="text-xs text-[#8B5CF6] hover:text-[#A78BFA] transition-colors">+ Add language</button>
         </div>
         {langs.length === 0 ? (
-          <p className="text-[#484f58] text-sm py-4 text-center border border-dashed border-[#30363d] rounded-xl">No languages added. <button onClick={addLang} className="text-[#4a9eda] hover:underline">Add one</button></p>
+          <p className="text-[#475569] text-sm py-4 text-center border border-dashed border-white/[0.07] rounded-xl">No languages added. <button onClick={addLang} className="text-[#8B5CF6] hover:underline">Add one</button></p>
         ) : (
           <div className="space-y-2">
             {langs.map((lang, i) => (
@@ -850,7 +850,7 @@ function LanguagesVolunteerSection({ profile, onChange }: { profile: ProfileData
                 <select className={`${sc} w-40 shrink-0`} value={lang.proficiency} onChange={e => updateLang(i, { proficiency: e.target.value })}>
                   {PROFICIENCY.map(p => <option key={p} value={p}>{p}</option>)}
                 </select>
-                <button onClick={() => removeLang(i)} className="p-2 text-[#484f58] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all shrink-0">
+                <button onClick={() => removeLang(i)} className="p-2 text-[#475569] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all shrink-0">
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
               </div>
@@ -862,29 +862,29 @@ function LanguagesVolunteerSection({ profile, onChange }: { profile: ProfileData
       {/* Volunteer */}
       <div className="mb-5">
         <div className="flex items-center justify-between mb-4">
-          <p className="text-sm font-semibold text-[#c9d1d9]">Volunteer & community work</p>
-          <button onClick={addVol} className="text-xs text-[#4a9eda] hover:text-[#79b8ff] transition-colors">+ Add volunteer role</button>
+          <p className="text-sm font-semibold text-[#CBD5E1]">Volunteer & community work</p>
+          <button onClick={addVol} className="text-xs text-[#8B5CF6] hover:text-[#A78BFA] transition-colors">+ Add volunteer role</button>
         </div>
         <div className="space-y-3">
           {vols.length === 0 && (
-            <p className="text-[#484f58] text-sm py-4 text-center border border-dashed border-[#30363d] rounded-xl">No volunteer roles added. <button onClick={addVol} className="text-[#4a9eda] hover:underline">Add one</button></p>
+            <p className="text-[#475569] text-sm py-4 text-center border border-dashed border-white/[0.07] rounded-xl">No volunteer roles added. <button onClick={addVol} className="text-[#8B5CF6] hover:underline">Add one</button></p>
           )}
           {vols.map(vol => (
-            <div key={vol.id} className="border border-[#30363d] rounded-xl overflow-hidden">
-              <div className={`flex items-center gap-3 px-4 py-3.5 cursor-pointer transition-colors ${expandedVolId === vol.id ? 'bg-[#1F4E79]/10' : 'hover:bg-white/[0.03]'}`} onClick={() => setExpandedVolId(expandedVolId === vol.id ? null : vol.id)}>
+            <div key={vol.id} className="border border-white/[0.06] rounded-xl overflow-hidden">
+              <div className={`flex items-center gap-3 px-4 py-3.5 cursor-pointer transition-colors ${expandedVolId === vol.id ? 'bg-[#6366F1]/05' : 'hover:bg-white/[0.03]'}`} onClick={() => setExpandedVolId(expandedVolId === vol.id ? null : vol.id)}>
                 <div className="flex-1 min-w-0">
-                  <p className="text-white text-sm font-medium truncate">{vol.role || <span className="text-[#484f58]">Role</span>}</p>
-                  <p className="text-[#8b949e] text-xs truncate mt-0.5">{vol.organization || 'Organisation'}</p>
+                  <p className="text-white text-sm font-medium truncate">{vol.role || <span className="text-[#475569]">Role</span>}</p>
+                  <p className="text-[#94A3B8] text-xs truncate mt-0.5">{vol.organization || 'Organisation'}</p>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
-                  <button onClick={e => { e.stopPropagation(); removeVol(vol.id) }} className="p-1.5 text-[#484f58] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all">
+                  <button onClick={e => { e.stopPropagation(); removeVol(vol.id) }} className="p-1.5 text-[#475569] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all">
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                   </button>
-                  <svg className={`w-4 h-4 text-[#484f58] transition-transform duration-200 ${expandedVolId === vol.id ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                  <svg className={`w-4 h-4 text-[#475569] transition-transform duration-200 ${expandedVolId === vol.id ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                 </div>
               </div>
               {expandedVolId === vol.id && (
-                <div className="px-4 pb-5 pt-4 border-t border-[#21262d] space-y-4">
+                <div className="px-4 pb-5 pt-4 border-t border-white/[0.05] space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <Field label="Role"><input className={ic} value={vol.role} onChange={e => updateVol(vol.id, { role: e.target.value })} placeholder="e.g. Mentor, Food Bank Volunteer" /></Field>
                     <Field label="Organisation"><input className={ic} value={vol.organization} onChange={e => updateVol(vol.id, { organization: e.target.value })} placeholder="e.g. Red Cross, local shelter" /></Field>
@@ -901,7 +901,7 @@ function LanguagesVolunteerSection({ profile, onChange }: { profile: ProfileData
         </div>
       </div>
 
-      <div className="flex justify-end pt-5 border-t border-[#21262d]">
+      <div className="flex justify-end pt-5 border-t border-white/[0.05]">
         <SaveButton state={state} onClick={() => save({ languages: langs, volunteer: vols })} />
       </div>
     </div>
@@ -927,9 +927,9 @@ function AdditionalSection({ profile, onChange }: { profile: ProfileData; onChan
       <SectionHeader title="Additional Information" description="Extra context that helps the AI write more accurate and personalised documents for you." />
 
       <div className="space-y-5">
-        <div className="bg-[#1F4E79]/5 border border-[#1F4E79]/20 rounded-xl p-4 flex gap-3">
-          <svg className="w-4 h-4 text-[#4a9eda] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          <p className="text-[#8b949e] text-sm leading-relaxed">
+        <div className="bg-[#6366F1]/5 border border-[#6366F1]/15 rounded-xl p-4 flex gap-3">
+          <svg className="w-4 h-4 text-[#8B5CF6] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <p className="text-[#94A3B8] text-sm leading-relaxed">
             This section is only used by the AI when generating your resume and cover letter. None of it appears directly in the output — it gives context to write better tailored content.
           </p>
         </div>
@@ -963,7 +963,7 @@ function AdditionalSection({ profile, onChange }: { profile: ProfileData; onChan
         </Field>
       </div>
 
-      <div className="flex justify-end mt-6 pt-5 border-t border-[#21262d]">
+      <div className="flex justify-end mt-6 pt-5 border-t border-white/[0.05]">
         <SaveButton state={state} onClick={() => save(d)} />
       </div>
     </div>
@@ -978,11 +978,11 @@ function Checkbox({ label, checked, onChange }: { label: string; checked: boolea
     <label className="flex items-center gap-3 cursor-pointer group w-fit">
       <div
         onClick={() => onChange(!checked)}
-        className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-200 shrink-0 ${checked ? 'bg-[#1F4E79] border-[#1F4E79]' : 'border-[#484f58] group-hover:border-[#4a9eda]'}`}
+        className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-200 shrink-0 ${checked ? 'bg-[#6366F1] border-[#6366F1]' : 'border-[#475569] group-hover:border-[#8B5CF6]'}`}
       >
         {checked && <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>}
       </div>
-      <span className="text-[#c9d1d9] text-sm select-none">{label}</span>
+      <span className="text-[#CBD5E1] text-sm select-none">{label}</span>
     </label>
   )
 }

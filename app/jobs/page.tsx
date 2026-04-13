@@ -145,8 +145,8 @@ function JobsPageInner() {
   return (
     <div className="max-w-7xl mx-auto px-6 py-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-white mb-1">Find Jobs</h1>
-        <p className="text-gray-500 text-sm">Search real listings from Adzuna and JSearch</p>
+        <h1 className="text-2xl font-bold text-white mb-1">Find <span className="bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] bg-clip-text text-transparent">Jobs</span></h1>
+        <p className="text-[#475569] text-sm">Search real listings from Adzuna</p>
       </div>
 
       <div className="mb-6">
@@ -161,11 +161,11 @@ function JobsPageInner() {
       <div className="flex gap-8">
         {/* Sidebar */}
         <aside className="hidden lg:block w-56 shrink-0">
-          <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-4 sticky top-24 space-y-5">
+          <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-4 sticky top-24 space-y-5">
 
             {/* Source filter */}
             <div>
-              <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mb-2">Source</p>
+              <p className="text-[#475569] text-xs font-semibold uppercase tracking-wide mb-2">Source</p>
               {(['both', 'adzuna', 'jsearch'] as const).map((s) => (
                 <label key={s} className="flex items-center gap-2 mb-2 cursor-pointer">
                   <input
@@ -174,29 +174,29 @@ function JobsPageInner() {
                     value={s}
                     checked={source === s}
                     onChange={() => { setSource(s); setPage(1); }}
-                    className="accent-[#1F4E79]"
+                    className="accent-[#6366F1]"
                   />
-                  <span className="text-gray-300 text-sm capitalize">{s}</span>
+                  <span className="text-[#CBD5E1] text-sm capitalize">{s}</span>
                 </label>
               ))}
             </div>
 
-            <div className="border-t border-[#30363d]" />
+            <div className="border-t border-white/[0.05]" />
 
             {/* Category filter */}
             <div>
-              <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mb-3">Job Category</p>
+              <p className="text-[#475569] text-xs font-semibold uppercase tracking-wide mb-3">Job Category</p>
               {CATEGORIES.map(({ group, items }) => (
                 <div key={group} className="mb-4">
-                  <p className="text-gray-600 text-xs font-medium uppercase tracking-wide mb-1.5">{group}</p>
+                  <p className="text-[#334155] text-xs font-medium uppercase tracking-wide mb-1.5">{group}</p>
                   {items.map((cat) => (
                     <button
                       key={cat}
                       onClick={() => handleCategoryClick(cat)}
-                      className={`w-full text-left text-sm px-2 py-1 rounded-md mb-0.5 transition-colors ${
+                      className={`w-full text-left text-sm px-2 py-1 rounded-lg mb-0.5 transition-colors ${
                         activeCategory === cat
-                          ? 'bg-[#1F4E79]/30 text-[#4a9eda] font-medium'
-                          : 'text-gray-400 hover:text-white hover:bg-[#30363d]'
+                          ? 'bg-[#6366F1]/15 text-[#818CF8] font-medium'
+                          : 'text-[#94A3B8] hover:text-white hover:bg-white/[0.04]'
                       }`}
                     >
                       {activeCategory === cat && <span className="mr-1">›</span>}
@@ -221,8 +221,8 @@ function JobsPageInner() {
           {/* Active category badge */}
           {activeCategory && (
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-xs text-gray-500">Category:</span>
-              <span className="inline-flex items-center gap-1.5 bg-[#1F4E79]/20 text-[#4a9eda] border border-[#1F4E79]/40 text-xs font-medium px-2.5 py-1 rounded-full">
+              <span className="text-xs text-[#475569]">Category:</span>
+              <span className="inline-flex items-center gap-1.5 bg-[#6366F1]/15 text-[#818CF8] border border-[#6366F1]/30 text-xs font-medium px-2.5 py-1 rounded-full">
                 {activeCategory}
                 <button
                   onClick={() => setActiveCategory('')}
@@ -236,19 +236,19 @@ function JobsPageInner() {
           )}
 
           {!hasSearch && !loading && (
-            <div className="text-center py-20 text-gray-500">
-              <svg className="w-12 h-12 mx-auto mb-4 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="text-center py-20">
+              <svg className="w-12 h-12 mx-auto mb-4 text-[#1e293b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-              <p className="text-lg font-medium text-gray-400">Search or pick a category</p>
-              <p className="text-sm mt-1">Enter a keyword, select a category, or choose a city to find IT jobs</p>
+              <p className="text-lg font-medium text-[#475569]">Search or pick a category</p>
+              <p className="text-sm mt-1 text-[#334155]">Enter a keyword, select a category, or choose a city to find IT jobs</p>
             </div>
           )}
 
           {hasSearch && (
             <>
               {!loading && jobs.length > 0 && (
-                <p className="text-gray-500 text-sm mb-4">
+                <p className="text-[#475569] text-sm mb-4">
                   Found <span className="text-white font-medium">{jobs.length}</span> jobs
                   {displayQuery && <> for <span className="text-white font-medium">"{displayQuery}"</span></>}
                   {(location || (!keyword && !activeCategory)) && (

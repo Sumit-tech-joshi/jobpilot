@@ -15,11 +15,11 @@ interface JobListProps {
 
 function SkeletonCard() {
   return (
-    <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-5 animate-pulse">
-      <div className="h-5 bg-[#30363d] rounded w-3/4 mb-2" />
-      <div className="h-4 bg-[#30363d] rounded w-1/2 mb-4" />
-      <div className="h-3 bg-[#30363d] rounded w-full mb-2" />
-      <div className="h-3 bg-[#30363d] rounded w-4/5" />
+    <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-5 animate-pulse">
+      <div className="h-5 bg-white/[0.05] rounded w-3/4 mb-2" />
+      <div className="h-4 bg-white/[0.05] rounded w-1/2 mb-4" />
+      <div className="h-3 bg-white/[0.05] rounded w-full mb-2" />
+      <div className="h-3 bg-white/[0.05] rounded w-4/5" />
     </div>
   );
 }
@@ -73,15 +73,15 @@ export default function JobList({
           <button
             onClick={() => onPageChange(page - 1)}
             disabled={page <= 1}
-            className="px-4 py-2 text-sm border border-[#30363d] rounded-lg text-gray-400 hover:text-white hover:border-[#1F4E79]/50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="px-4 py-2 text-sm border border-white/[0.07] rounded-xl text-[#94A3B8] hover:text-white hover:border-[#6366F1]/40 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
           >
             Previous
           </button>
-          <span className="text-gray-500 text-sm">Page {page}</span>
+          <span className="text-[#475569] text-sm">Page {page}</span>
           <button
             onClick={() => onPageChange(page + 1)}
             disabled={!hasMore}
-            className="px-4 py-2 text-sm border border-[#30363d] rounded-lg text-gray-400 hover:text-white hover:border-[#1F4E79]/50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="px-4 py-2 text-sm border border-white/[0.07] rounded-xl text-[#94A3B8] hover:text-white hover:border-[#6366F1]/40 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
           >
             Next
           </button>

@@ -42,8 +42,8 @@ export default function ApplicationTable({ applications, onDelete, onDownload }:
             onClick={() => setFilter(s)}
             className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors capitalize ${
               filter === s
-                ? 'bg-[#1F4E79]/20 text-[#4a9eda] border-[#1F4E79]/40'
-                : 'border-[#30363d] text-gray-400 hover:text-white hover:border-[#1F4E79]/30'
+                ? 'bg-[#6366F1]/10 text-[#818CF8] border-[#6366F1]/30'
+                : 'border-white/[0.07] text-[#94A3B8] hover:text-white hover:border-[#6366F1]/30'
             }`}
           >
             {s === 'all' ? 'All' : s}
@@ -51,7 +51,7 @@ export default function ApplicationTable({ applications, onDelete, onDownload }:
         ))}
         <button
           onClick={() => setSortDir((d) => (d === 'desc' ? 'asc' : 'desc'))}
-          className="ml-auto px-3 py-1.5 rounded-lg text-xs font-medium border border-[#30363d] text-gray-400 hover:text-white transition-colors"
+          className="ml-auto px-3 py-1.5 rounded-lg text-xs font-medium border border-white/[0.07] text-[#94A3B8] hover:text-white transition-colors"
         >
           Date {sortDir === 'desc' ? '(newest first)' : '(oldest first)'}
         </button>
@@ -61,7 +61,7 @@ export default function ApplicationTable({ applications, onDelete, onDownload }:
         <div className="text-center py-20 text-gray-500">
           <p className="text-lg font-medium">No applications found</p>
           <p className="text-sm mt-1">
-            <Link href="/jobs" className="text-[#4a9eda] hover:underline">
+            <Link href="/jobs" className="text-[#8B5CF6] hover:underline">
               Find and save jobs
             </Link>{' '}
             to get started.
@@ -71,7 +71,7 @@ export default function ApplicationTable({ applications, onDelete, onDownload }:
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-[#30363d] text-gray-500 text-left">
+              <tr className="border-b border-white/[0.07] text-[#475569] text-left">
                 <th className="pb-3 pr-4 font-medium">Job Title</th>
                 <th className="pb-3 pr-4 font-medium">Company</th>
                 <th className="pb-3 pr-4 font-medium">Status</th>
@@ -79,7 +79,7 @@ export default function ApplicationTable({ applications, onDelete, onDownload }:
                 <th className="pb-3 font-medium">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#30363d]">
+            <tbody className="divide-y divide-white/[0.05]">
               {filtered.map((app) => {
                 const job = getJob(app);
                 return (
@@ -88,7 +88,7 @@ export default function ApplicationTable({ applications, onDelete, onDownload }:
                       {job ? (
                         <Link
                           href={`/jobs/${encodeURIComponent((job as { jobId?: string }).jobId || String(app.jobId))}`}
-                          className="text-white hover:text-[#4a9eda] transition-colors font-medium"
+                          className="text-white hover:text-[#8B5CF6] transition-colors font-medium"
                         >
                           {(job as { title?: string }).title || 'Unknown Job'}
                         </Link>
@@ -96,13 +96,13 @@ export default function ApplicationTable({ applications, onDelete, onDownload }:
                         <span className="text-gray-400">Unknown Job</span>
                       )}
                     </td>
-                    <td className="py-4 pr-4 text-gray-400">
+                    <td className="py-4 pr-4 text-[#94A3B8]">
                       {job ? (job as { company?: string }).company : '-'}
                     </td>
                     <td className="py-4 pr-4">
                       <StatusBadge status={app.status} />
                     </td>
-                    <td className="py-4 pr-4 text-gray-500">
+                    <td className="py-4 pr-4 text-[#475569]">
                       {new Date(app.updatedAt).toLocaleDateString('en-CA', {
                         month: 'short',
                         day: 'numeric',
@@ -114,7 +114,7 @@ export default function ApplicationTable({ applications, onDelete, onDownload }:
                         {job && (
                           <Link
                             href={`/jobs/${encodeURIComponent((job as { jobId?: string }).jobId || String(app.jobId))}`}
-                            className="text-xs text-[#4a9eda] hover:underline whitespace-nowrap"
+                            className="text-xs text-[#8B5CF6] hover:underline whitespace-nowrap"
                           >
                             View
                           </Link>

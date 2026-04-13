@@ -58,14 +58,14 @@ export default function JobSearch({
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           placeholder="Job title or keyword (optional)..."
-          className="w-full bg-[#161b22] border border-[#30363d] text-white placeholder-gray-500 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#1F4E79] focus:ring-1 focus:ring-[#1F4E79] transition-colors"
+          className="w-full bg-white/[0.02] border border-white/[0.07] text-white placeholder-[#475569] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#6366F1] focus:ring-1 focus:ring-[#6366F1]/30 transition-colors"
         />
       </div>
       <div className="sm:w-52 shrink-0">
         <select
           value={location}
           onChange={(e) => handleLocationChange(e.target.value)}
-          className="w-full bg-[#161b22] border border-[#30363d] text-white rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[#1F4E79] focus:ring-1 focus:ring-[#1F4E79] transition-colors appearance-none cursor-pointer"
+          className="w-full bg-white/[0.02] border border-white/[0.07] text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#6366F1] focus:ring-1 focus:ring-[#6366F1]/30 transition-colors appearance-none cursor-pointer"
         >
           {CA_CITIES.map((c) => (
             <option key={c.value} value={c.value}>
@@ -77,7 +77,7 @@ export default function JobSearch({
       <button
         type="submit"
         disabled={loading}
-        className="bg-[#1F4E79] hover:bg-[#2563a0] disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium px-6 py-3 rounded-lg text-sm transition-colors whitespace-nowrap"
+        className="bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium px-6 py-3 rounded-xl text-sm transition-all whitespace-nowrap shadow-lg shadow-[#6366F1]/20"
       >
         {loading ? 'Searching...' : 'Search Jobs'}
       </button>

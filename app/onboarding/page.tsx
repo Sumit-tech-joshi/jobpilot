@@ -283,11 +283,11 @@ export default function OnboardingPage() {
         }
       `}</style>
 
-      <div className="min-h-screen bg-[#0d1117] flex flex-col">
+      <div className="min-h-screen bg-[#080C14] flex flex-col">
         {/* ── Top progress bar ── */}
-        <div className="fixed top-0 left-0 right-0 h-1 bg-[#21262d] z-50">
+        <div className="fixed top-0 left-0 right-0 h-1 bg-white/[0.05] z-50">
           <div
-            className="h-full bg-gradient-to-r from-[#1F4E79] to-[#4a9eda] transition-all duration-500 ease-out"
+            className="h-full bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] transition-all duration-500 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -295,20 +295,20 @@ export default function OnboardingPage() {
         {/* ── Header ── */}
         <div className="flex items-center justify-between px-6 md:px-10 pt-8 pb-2">
           <div className="flex items-center gap-1.5">
-            <span className="text-[#1F4E79] font-bold text-xl tracking-tight">Job</span>
+            <span className="font-bold text-xl tracking-tight bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] bg-clip-text text-transparent">Job</span>
             <span className="text-white font-bold text-xl tracking-tight">Pilot</span>
           </div>
           <div className="flex items-center gap-4">
             {step >= 3 && step < TOTAL_STEPS && (
               <button
                 onClick={next}
-                className="text-[#8b949e] hover:text-[#c9d1d9] text-sm transition-colors"
+                className="text-[#94A3B8] hover:text-white text-sm transition-colors"
               >
                 Skip this step →
               </button>
             )}
-            <span className="text-[#484f58] text-sm">
-              {step} <span className="text-[#30363d]">/</span> {TOTAL_STEPS}
+            <span className="text-[#475569] text-sm">
+              {step} <span className="text-[#334155]">/</span> {TOTAL_STEPS}
             </span>
           </div>
         </div>
@@ -320,10 +320,10 @@ export default function OnboardingPage() {
               key={i}
               className={`rounded-full transition-all duration-300 ${
                 i + 1 < step
-                  ? 'w-2 h-2 bg-[#4a9eda]'
+                  ? 'w-2 h-2 bg-[#8B5CF6]'
                   : i + 1 === step
-                  ? 'w-6 h-2 bg-[#1F4E79]'
-                  : 'w-2 h-2 bg-[#21262d]'
+                  ? 'w-6 h-2 bg-[#6366F1]'
+                  : 'w-2 h-2 bg-white/[0.08]'
               }`}
             />
           ))}
@@ -415,11 +415,11 @@ function Step1({
   return (
     <div>
       <div className="mb-8">
-        <p className="text-[#4a9eda] text-sm font-medium mb-2">Step 1 of 6</p>
+        <p className="text-[#8B5CF6] text-sm font-medium mb-2">Step 1 of 6</p>
         <h2 className="text-3xl font-bold text-white mb-2">
           Hi {userName}, what&apos;s your field?
         </h2>
-        <p className="text-[#8b949e]">
+        <p className="text-[#94A3B8]">
           This helps us tailor suggestions. You can apply for any job regardless of what you pick.
         </p>
       </div>
@@ -433,22 +433,22 @@ function Step1({
               onClick={() => onSelect(ind.id)}
               className={`relative flex flex-col items-center text-center p-4 rounded-2xl border transition-all duration-200 group hover:scale-[1.03] ${
                 active
-                  ? 'bg-[#1F4E79]/20 border-[#1F4E79]/70 shadow-lg shadow-[#1F4E79]/10'
-                  : 'bg-[#161b22] border-[#30363d] hover:border-[#1F4E79]/40 hover:bg-[#1F4E79]/5'
+                  ? 'bg-[#6366F1]/15 border-[#6366F1]/60 shadow-lg shadow-[#6366F1]/10'
+                  : 'bg-white/[0.02] border-white/[0.06] hover:border-[#6366F1]/30 hover:bg-[#6366F1]/5'
               }`}
             >
               {active && (
-                <span className="absolute top-2 right-2 w-4 h-4 rounded-full bg-[#4a9eda] flex items-center justify-center">
+                <span className="absolute top-2 right-2 w-4 h-4 rounded-full bg-[#8B5CF6] flex items-center justify-center">
                   <svg className="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                   </svg>
                 </span>
               )}
               <span className="text-2xl mb-2">{ind.icon}</span>
-              <p className={`text-xs font-semibold leading-tight ${active ? 'text-[#79b8ff]' : 'text-[#c9d1d9] group-hover:text-white'}`}>
+              <p className={`text-xs font-semibold leading-tight ${active ? 'text-[#A78BFA]' : 'text-[#CBD5E1] group-hover:text-white'}`}>
                 {ind.title}
               </p>
-              <p className="text-[10px] text-[#484f58] mt-1 leading-tight">{ind.subtitle}</p>
+              <p className="text-[10px] text-[#475569] mt-1 leading-tight">{ind.subtitle}</p>
             </button>
           )
         })}
@@ -458,7 +458,7 @@ function Step1({
         <button
           onClick={onNext}
           disabled={!selected}
-          className="flex items-center gap-2 px-6 py-3 bg-[#1F4E79] hover:bg-[#2563a8] disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all duration-200 text-sm"
+          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all duration-200 text-sm shadow-lg shadow-[#6366F1]/20"
         >
           Continue
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -494,22 +494,22 @@ function Step2({
   return (
     <div>
       <div className="mb-8">
-        <p className="text-[#4a9eda] text-sm font-medium mb-2">Step 2 of 6</p>
+        <p className="text-[#8B5CF6] text-sm font-medium mb-2">Step 2 of 6</p>
         <h2 className="text-3xl font-bold text-white mb-2">About you</h2>
-        <p className="text-[#8b949e]">
+        <p className="text-[#94A3B8]">
           This information will appear at the top of your resume.
         </p>
       </div>
 
-      <div className="bg-[#161b22] border border-[#30363d] rounded-2xl p-6 space-y-5">
+      <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 space-y-5">
         <Field label="Your name">
           <input
             type="text"
             defaultValue={userName}
             readOnly
-            className="w-full px-4 py-3 bg-[#0d1117] border border-[#21262d] rounded-xl text-[#6e7681] text-sm cursor-not-allowed"
+            className="w-full px-4 py-3 bg-[#080C14] border border-white/[0.05] rounded-xl text-[#475569] text-sm cursor-not-allowed"
           />
-          <p className="text-[#484f58] text-xs mt-1">Taken from your account</p>
+          <p className="text-[#475569] text-xs mt-1">Taken from your account</p>
         </Field>
 
         <Field label="Professional headline">
@@ -570,14 +570,14 @@ function Step3({
   return (
     <div>
       <div className="mb-8">
-        <p className="text-[#4a9eda] text-sm font-medium mb-2">Step 3 of 6</p>
+        <p className="text-[#8B5CF6] text-sm font-medium mb-2">Step 3 of 6</p>
         <h2 className="text-3xl font-bold text-white mb-2">Most recent role</h2>
-        <p className="text-[#8b949e]">
+        <p className="text-[#94A3B8]">
           Add your latest or current position. You can add more later.
         </p>
       </div>
 
-      <div className="bg-[#161b22] border border-[#30363d] rounded-2xl p-6 space-y-5">
+      <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 space-y-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <Field label="Job title" required>
             <input
@@ -652,8 +652,8 @@ function Step3({
             onClick={() => onChange({ currentRole: !exp.currentRole, endDate: '' })}
             className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-200 ${
               exp.currentRole
-                ? 'bg-[#1F4E79] border-[#1F4E79]'
-                : 'border-[#484f58] group-hover:border-[#4a9eda]'
+                ? 'bg-[#6366F1] border-[#6366F1]'
+                : 'border-[#475569] group-hover:border-[#8B5CF6]'
             }`}
           >
             {exp.currentRole && (
@@ -662,7 +662,7 @@ function Step3({
               </svg>
             )}
           </div>
-          <span className="text-[#c9d1d9] text-sm select-none">I currently work here</span>
+          <span className="text-[#CBD5E1] text-sm select-none">I currently work here</span>
         </label>
 
         <Field label="Brief description (optional)">
@@ -698,14 +698,14 @@ function Step4({
   return (
     <div>
       <div className="mb-8">
-        <p className="text-[#4a9eda] text-sm font-medium mb-2">Step 4 of 6</p>
+        <p className="text-[#8B5CF6] text-sm font-medium mb-2">Step 4 of 6</p>
         <h2 className="text-3xl font-bold text-white mb-2">Education</h2>
-        <p className="text-[#8b949e]">
+        <p className="text-[#94A3B8]">
           Add your highest qualification. This can be a degree, diploma, trade certificate, or anything else.
         </p>
       </div>
 
-      <div className="bg-[#161b22] border border-[#30363d] rounded-2xl p-6 space-y-5">
+      <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 space-y-5">
         <Field label="Credential / qualification">
           <input
             type="text"
@@ -754,8 +754,8 @@ function Step4({
             onClick={() => onChange({ current: !edu.current, endDate: '' })}
             className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-200 ${
               edu.current
-                ? 'bg-[#1F4E79] border-[#1F4E79]'
-                : 'border-[#484f58] group-hover:border-[#4a9eda]'
+                ? 'bg-[#6366F1] border-[#6366F1]'
+                : 'border-[#475569] group-hover:border-[#8B5CF6]'
             }`}
           >
             {edu.current && (
@@ -764,7 +764,7 @@ function Step4({
               </svg>
             )}
           </div>
-          <span className="text-[#c9d1d9] text-sm select-none">Currently studying</span>
+          <span className="text-[#CBD5E1] text-sm select-none">Currently studying</span>
         </label>
       </div>
 
@@ -815,14 +815,14 @@ function Step5({
   return (
     <div>
       <div className="mb-8">
-        <p className="text-[#4a9eda] text-sm font-medium mb-2">Step 5 of 6</p>
+        <p className="text-[#8B5CF6] text-sm font-medium mb-2">Step 5 of 6</p>
         <h2 className="text-3xl font-bold text-white mb-2">Your skills</h2>
-        <p className="text-[#8b949e]">
+        <p className="text-[#94A3B8]">
           Add your key skills. Press Enter after each one. You can expand this later.
         </p>
       </div>
 
-      <div className="bg-[#161b22] border border-[#30363d] rounded-2xl p-6 space-y-5">
+      <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 space-y-5">
         {/* Category name */}
         <Field label="Skill category name">
           <input
@@ -848,7 +848,7 @@ function Step5({
             <button
               onClick={onAdd}
               disabled={!skillInput.trim()}
-              className="px-4 py-3 bg-[#1F4E79]/20 hover:bg-[#1F4E79]/40 border border-[#1F4E79]/40 text-[#4a9eda] rounded-xl text-sm font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              className="px-4 py-3 bg-[#6366F1]/10 hover:bg-[#6366F1]/20 border border-[#6366F1]/30 text-[#8B5CF6] rounded-xl text-sm font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed"
             >
               Add
             </button>
@@ -861,12 +861,12 @@ function Step5({
             {skills.map((s) => (
               <span
                 key={s}
-                className="skill-tag flex items-center gap-1.5 px-3 py-1.5 bg-[#1F4E79]/20 border border-[#1F4E79]/40 text-[#79b8ff] rounded-lg text-sm"
+                className="skill-tag flex items-center gap-1.5 px-3 py-1.5 bg-[#6366F1]/15 border border-[#6366F1]/30 text-[#A78BFA] rounded-lg text-sm"
               >
                 {s}
                 <button
                   onClick={() => onRemove(s)}
-                  className="text-[#4a9eda]/60 hover:text-red-400 transition-colors ml-0.5"
+                  className="text-[#8B5CF6]/60 hover:text-red-400 transition-colors ml-0.5"
                 >
                   <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
@@ -880,13 +880,13 @@ function Step5({
         {/* Suggestions */}
         {suggestions.length > 0 && (
           <div>
-            <p className="text-[#484f58] text-xs mb-2 uppercase tracking-wider">Suggested for you</p>
+            <p className="text-[#475569] text-xs mb-2 uppercase tracking-wider">Suggested for you</p>
             <div className="flex flex-wrap gap-2">
               {suggestions.slice(0, 8).map((s) => (
                 <button
                   key={s}
                   onClick={() => onSuggestion(s)}
-                  className="px-3 py-1.5 bg-[#21262d] hover:bg-[#1F4E79]/20 border border-[#30363d] hover:border-[#1F4E79]/40 text-[#8b949e] hover:text-[#79b8ff] rounded-lg text-sm transition-all duration-200"
+                  className="px-3 py-1.5 bg-white/[0.03] hover:bg-[#6366F1]/10 border border-white/[0.07] hover:border-[#6366F1]/30 text-[#94A3B8] hover:text-[#A78BFA] rounded-lg text-sm transition-all duration-200"
                 >
                   + {s}
                 </button>
@@ -943,32 +943,32 @@ function Step6({
         </div>
       </div>
 
-      <p className="text-[#4a9eda] text-sm font-medium mb-2">Step 6 of 6</p>
+      <p className="text-[#8B5CF6] text-sm font-medium mb-2">Step 6 of 6</p>
       <h2 className="text-3xl font-bold text-white mb-3">You&apos;re all set!</h2>
-      <p className="text-[#8b949e] leading-relaxed mb-8">
+      <p className="text-[#94A3B8] leading-relaxed mb-8">
         Your profile is ready. You can always add more details later to improve your document quality.
       </p>
 
       {/* Completion bar */}
-      <div className="bg-[#161b22] border border-[#30363d] rounded-2xl p-5 mb-8 text-left">
+      <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-5 mb-8 text-left">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-[#c9d1d9] text-sm font-medium">Profile completion</span>
-          <span className="text-[#4a9eda] text-sm font-bold">{score}%</span>
+          <span className="text-[#CBD5E1] text-sm font-medium">Profile completion</span>
+          <span className="text-[#8B5CF6] text-sm font-bold">{score}%</span>
         </div>
-        <div className="h-2 bg-[#21262d] rounded-full overflow-hidden">
+        <div className="h-2 bg-white/[0.05] rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-[#1F4E79] to-[#4a9eda] rounded-full transition-all duration-700"
+            className="h-full bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] rounded-full transition-all duration-700"
             style={{ width: `${score}%` }}
           />
         </div>
-        <p className="text-[#484f58] text-xs mt-3">
+        <p className="text-[#475569] text-xs mt-3">
           Add more experience, certifications, and projects on your profile page to reach 100%.
         </p>
       </div>
 
       {/* Summary of what was added */}
-      <div className="bg-[#161b22] border border-[#30363d] rounded-2xl p-5 mb-8 text-left space-y-2">
-        <p className="text-[#8b949e] text-xs uppercase tracking-wider mb-3">What you added</p>
+      <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-5 mb-8 text-left space-y-2">
+        <p className="text-[#94A3B8] text-xs uppercase tracking-wider mb-3">What you added</p>
         {[
           { label: 'Industry', value: INDUSTRIES.find((i) => i.id === data.industry)?.title },
           { label: 'Headline', value: data.headline || null },
@@ -982,8 +982,8 @@ function Step6({
               <svg className="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
               </svg>
-              <span className="text-[#8b949e] text-sm">
-                <span className="text-[#484f58]">{label}: </span>
+              <span className="text-[#94A3B8] text-sm">
+                <span className="text-[#475569]">{label}: </span>
                 {value}
               </span>
             </div>
@@ -996,7 +996,7 @@ function Step6({
         <button
           onClick={onFinish}
           disabled={saving}
-          className="flex-1 flex items-center justify-center gap-2 py-3.5 px-6 bg-[#1F4E79] hover:bg-[#2563a8] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all duration-200 text-sm"
+          className="flex-1 flex items-center justify-center gap-2 py-3.5 px-6 bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all duration-200 text-sm shadow-lg shadow-[#6366F1]/20"
         >
           {saving ? (
             <>
@@ -1017,7 +1017,7 @@ function Step6({
       <button
         onClick={onBack}
         disabled={saving}
-        className="mt-4 text-[#484f58] hover:text-[#8b949e] text-sm transition-colors disabled:opacity-50"
+        className="mt-4 text-[#475569] hover:text-[#94A3B8] text-sm transition-colors disabled:opacity-50"
       >
         ← Go back and edit
       </button>
@@ -1029,10 +1029,10 @@ function Step6({
    Shared UI helpers
 ───────────────────────────────────────────── */
 const inputCls =
-  'w-full px-4 py-3 bg-[#0d1117] border border-[#30363d] hover:border-[#484f58] focus:border-[#1F4E79] focus:ring-2 focus:ring-[#1F4E79]/20 rounded-xl text-white placeholder-[#484f58] outline-none transition-all duration-200 text-sm'
+  'w-full px-4 py-3 bg-[#080C14] border border-white/[0.08] hover:border-white/[0.15] focus:border-[#6366F1] focus:ring-2 focus:ring-[#6366F1]/20 rounded-xl text-white placeholder-[#475569] outline-none transition-all duration-200 text-sm'
 
 const selectCls =
-  'w-full px-4 py-3 bg-[#0d1117] border border-[#30363d] hover:border-[#484f58] focus:border-[#1F4E79] focus:ring-2 focus:ring-[#1F4E79]/20 rounded-xl text-white outline-none transition-all duration-200 text-sm appearance-none cursor-pointer'
+  'w-full px-4 py-3 bg-[#080C14] border border-white/[0.08] hover:border-white/[0.15] focus:border-[#6366F1] focus:ring-2 focus:ring-[#6366F1]/20 rounded-xl text-white outline-none transition-all duration-200 text-sm appearance-none cursor-pointer'
 
 function Field({
   label,
@@ -1045,9 +1045,9 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-xs font-medium text-[#8b949e] uppercase tracking-wider mb-2">
+      <label className="block text-xs font-medium text-[#94A3B8] uppercase tracking-wider mb-2">
         {label}
-        {required && <span className="text-[#1F4E79] ml-1">*</span>}
+        {required && <span className="text-[#8B5CF6] ml-1">*</span>}
       </label>
       {children}
     </div>
@@ -1059,7 +1059,7 @@ function StepNav({ onBack, onNext }: { onBack: () => void; onNext: () => void })
     <div className="flex items-center justify-between mt-8">
       <button
         onClick={onBack}
-        className="flex items-center gap-2 px-5 py-2.5 text-[#8b949e] hover:text-white hover:bg-white/5 border border-transparent hover:border-white/10 rounded-xl text-sm transition-all duration-200"
+        className="flex items-center gap-2 px-5 py-2.5 text-[#94A3B8] hover:text-white hover:bg-white/[0.04] border border-transparent hover:border-white/[0.08] rounded-xl text-sm transition-all duration-200"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
@@ -1068,7 +1068,7 @@ function StepNav({ onBack, onNext }: { onBack: () => void; onNext: () => void })
       </button>
       <button
         onClick={onNext}
-        className="flex items-center gap-2 px-6 py-3 bg-[#1F4E79] hover:bg-[#2563a8] text-white font-semibold rounded-xl transition-all duration-200 text-sm"
+        className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] hover:opacity-90 text-white font-semibold rounded-xl transition-all duration-200 text-sm shadow-lg shadow-[#6366F1]/20"
       >
         Continue
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

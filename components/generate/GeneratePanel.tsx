@@ -125,13 +125,13 @@ export default function GeneratePanel({ job }: GeneratePanelProps) {
   return (
     <div className="space-y-5">
       {/* Generate Buttons */}
-      <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-5">
+      <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-5">
         <h2 className="text-white font-semibold mb-4">Generate with AI</h2>
         <div className="flex flex-col gap-3">
           <button
             onClick={handleGenerateResume}
             disabled={loadingResume}
-            className="w-full bg-[#1F4E79] hover:bg-[#2563a0] disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-3 rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
+            className="w-full bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-3 rounded-xl text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#6366F1]/20"
           >
             {loadingResume ? (
               <>
@@ -154,7 +154,7 @@ export default function GeneratePanel({ job }: GeneratePanelProps) {
           <button
             onClick={handleGenerateCoverLetter}
             disabled={loadingCover}
-            className="w-full bg-[#1F4E79]/20 hover:bg-[#1F4E79]/40 disabled:opacity-50 disabled:cursor-not-allowed text-[#4a9eda] border border-[#1F4E79]/40 font-medium py-3 rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
+            className="w-full bg-[#6366F1]/10 hover:bg-[#6366F1]/20 disabled:opacity-50 disabled:cursor-not-allowed text-[#8B5CF6] border border-[#6366F1]/30 font-medium py-3 rounded-xl text-sm transition-all flex items-center justify-center gap-2"
           >
             {loadingCover ? (
               <>
@@ -181,12 +181,12 @@ export default function GeneratePanel({ job }: GeneratePanelProps) {
       </div>
 
       {/* Status + Notes */}
-      <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-5">
+      <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-5">
         <h2 className="text-white font-semibold mb-4">Application Status</h2>
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value as ApplicationStatus)}
-          className="w-full bg-[#0d1117] border border-[#30363d] text-white rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#1F4E79] mb-3"
+          className="w-full bg-[#080C14] border border-white/[0.08] hover:border-white/[0.15] focus:border-[#6366F1] text-white rounded-xl px-3 py-2.5 text-sm outline-none transition-all duration-200 mb-3"
         >
           <option value="saved">Saved</option>
           <option value="applied">Applied</option>
@@ -199,11 +199,11 @@ export default function GeneratePanel({ job }: GeneratePanelProps) {
           onChange={(e) => setNotes(e.target.value)}
           placeholder="Notes (optional)..."
           rows={3}
-          className="w-full bg-[#0d1117] border border-[#30363d] text-white placeholder-gray-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#1F4E79] resize-none mb-3"
+          className="w-full bg-[#080C14] border border-white/[0.08] hover:border-white/[0.15] focus:border-[#6366F1] text-white placeholder-[#475569] rounded-xl px-3 py-2.5 text-sm outline-none transition-all duration-200 resize-none mb-3"
         />
         <button
           onClick={handleSaveStatus}
-          className="w-full bg-[#30363d] hover:bg-[#3d444d] text-white font-medium py-2.5 rounded-lg text-sm transition-colors"
+          className="w-full bg-white/[0.05] hover:bg-white/[0.09] border border-white/[0.08] text-white font-medium py-2.5 rounded-xl text-sm transition-colors"
         >
           {savedStatus ? 'Saved!' : 'Save Status'}
         </button>
@@ -211,7 +211,7 @@ export default function GeneratePanel({ job }: GeneratePanelProps) {
 
       {/* Preview Area */}
       {(resume || coverLetter) && (
-        <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-5">
+        <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-5">
           {/* Tab switcher */}
           <div className="flex gap-2 mb-4">
             {resume && (
@@ -219,8 +219,8 @@ export default function GeneratePanel({ job }: GeneratePanelProps) {
                 onClick={() => setActiveTab('resume')}
                 className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                   activeTab === 'resume'
-                    ? 'bg-[#1F4E79]/20 text-[#4a9eda] border border-[#1F4E79]/40'
-                    : 'text-gray-400 hover:text-white'
+                    ? 'bg-[#6366F1]/10 text-[#8B5CF6] border border-[#6366F1]/30'
+                    : 'text-[#94A3B8] hover:text-white'
                 }`}
               >
                 Resume
@@ -231,8 +231,8 @@ export default function GeneratePanel({ job }: GeneratePanelProps) {
                 onClick={() => setActiveTab('coverletter')}
                 className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                   activeTab === 'coverletter'
-                    ? 'bg-[#1F4E79]/20 text-[#4a9eda] border border-[#1F4E79]/40'
-                    : 'text-gray-400 hover:text-white'
+                    ? 'bg-[#6366F1]/10 text-[#8B5CF6] border border-[#6366F1]/30'
+                    : 'text-[#94A3B8] hover:text-white'
                 }`}
               >
                 Cover Letter
@@ -254,7 +254,7 @@ export default function GeneratePanel({ job }: GeneratePanelProps) {
                 <button
                   onClick={() => handleDownload('resume', 'docx')}
                   disabled={loadingDownload !== null}
-                  className="flex-1 bg-[#1F4E79]/20 hover:bg-[#1F4E79]/40 text-[#4a9eda] border border-[#1F4E79]/40 font-medium py-2.5 rounded-lg text-sm transition-colors disabled:opacity-50"
+                  className="flex-1 bg-[#6366F1]/10 hover:bg-[#6366F1]/20 text-[#8B5CF6] border border-[#6366F1]/30 font-medium py-2.5 rounded-xl text-sm transition-colors disabled:opacity-50"
                 >
                   {loadingDownload === 'resume-docx' ? 'Preparing...' : 'Download DOCX'}
                 </button>
@@ -276,7 +276,7 @@ export default function GeneratePanel({ job }: GeneratePanelProps) {
                 <button
                   onClick={() => handleDownload('coverletter', 'docx')}
                   disabled={loadingDownload !== null}
-                  className="flex-1 bg-[#1F4E79]/20 hover:bg-[#1F4E79]/40 text-[#4a9eda] border border-[#1F4E79]/40 font-medium py-2.5 rounded-lg text-sm transition-colors disabled:opacity-50"
+                  className="flex-1 bg-[#6366F1]/10 hover:bg-[#6366F1]/20 text-[#8B5CF6] border border-[#6366F1]/30 font-medium py-2.5 rounded-xl text-sm transition-colors disabled:opacity-50"
                 >
                   {loadingDownload === 'coverletter-docx' ? 'Preparing...' : 'Download DOCX'}
                 </button>

@@ -15,21 +15,21 @@ export default function JobCard({ job, onSave, isSaved }: JobCardProps) {
     : null;
 
   return (
-    <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-5 hover:border-[#1F4E79]/50 transition-colors group">
+    <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-5 hover:border-[#6366F1]/30 hover:bg-white/[0.04] transition-all duration-200 group">
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1 min-w-0">
           <Link
             href={`/jobs/${encodeURIComponent(job.jobId)}`}
-            className="block text-white font-semibold text-base group-hover:text-[#4a9eda] transition-colors truncate"
+            className="block text-white font-semibold text-base group-hover:text-[#8B5CF6] transition-colors truncate"
           >
             {job.title}
           </Link>
-          <p className="text-gray-400 text-sm mt-0.5 truncate">{job.company}</p>
+          <p className="text-[#94A3B8] text-sm mt-0.5 truncate">{job.company}</p>
         </div>
         <span
           className={`shrink-0 text-xs font-medium px-2 py-0.5 rounded-full border ${
             job.source === 'adzuna'
-              ? 'bg-purple-500/10 text-purple-300 border-purple-500/30'
+              ? 'bg-[#8B5CF6]/10 text-[#A78BFA] border-[#8B5CF6]/30'
               : 'bg-orange-500/10 text-orange-300 border-orange-500/30'
           }`}
         >
@@ -37,7 +37,7 @@ export default function JobCard({ job, onSave, isSaved }: JobCardProps) {
         </span>
       </div>
 
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-sm text-gray-500">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-sm text-[#475569]">
         <span className="flex items-center gap-1">
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -62,7 +62,7 @@ export default function JobCard({ job, onSave, isSaved }: JobCardProps) {
           {job.tags.slice(0, 5).map((tag) => (
             <span
               key={tag}
-              className="text-xs bg-[#1F4E79]/10 text-[#4a9eda]/70 border border-[#1F4E79]/20 px-2 py-0.5 rounded"
+              className="text-xs bg-[#6366F1]/10 text-[#818CF8] border border-[#6366F1]/20 px-2 py-0.5 rounded-md"
             >
               {tag}
             </span>
@@ -70,19 +70,19 @@ export default function JobCard({ job, onSave, isSaved }: JobCardProps) {
         </div>
       )}
 
-      <div className="flex items-center gap-3 mt-4 pt-4 border-t border-[#30363d]">
+      <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/[0.05]">
         <Link
           href={`/jobs/${encodeURIComponent(job.jobId)}`}
-          className="flex-1 text-center text-sm text-[#4a9eda] hover:text-white transition-colors font-medium"
+          className="flex-1 text-center text-sm text-[#8B5CF6] hover:text-[#A78BFA] transition-colors font-medium"
         >
           View Details
         </Link>
         <button
           onClick={() => onSave?.(job)}
-          className={`flex-1 text-sm font-medium py-1.5 rounded-lg border transition-colors ${
+          className={`flex-1 text-sm font-medium py-1.5 rounded-xl border transition-all ${
             isSaved
-              ? 'bg-[#1F4E79]/20 text-[#4a9eda] border-[#1F4E79]/40'
-              : 'border-[#30363d] text-gray-400 hover:border-[#1F4E79]/40 hover:text-[#4a9eda]'
+              ? 'bg-[#6366F1]/10 text-[#818CF8] border-[#6366F1]/30'
+              : 'border-white/[0.08] text-[#94A3B8] hover:border-[#6366F1]/30 hover:text-[#8B5CF6]'
           }`}
         >
           {isSaved ? 'Saved' : 'Save'}

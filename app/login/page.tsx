@@ -50,19 +50,19 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen flex bg-[#0d1117]">
+    <div className="min-h-screen flex bg-[#080C14]">
       {/* ── Left branding panel ── */}
-      <div className="hidden lg:flex lg:w-[52%] relative flex-col justify-between p-14 overflow-hidden bg-gradient-to-br from-[#0d1117] via-[#0e1a2b] to-[#0d1117]">
+      <div className="hidden lg:flex lg:w-[52%] relative flex-col justify-between p-14 overflow-hidden bg-gradient-to-br from-[#080C14] via-[#0D1020] to-[#080C14]">
         {/* Decorative blobs */}
-        <div className="absolute top-[-80px] right-[-80px] w-[380px] h-[380px] rounded-full bg-[#1F4E79]/15 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-[-60px] left-[-60px] w-[280px] h-[280px] rounded-full bg-[#1F4E79]/8 blur-2xl pointer-events-none" />
-        <div className="absolute top-[40%] left-[30%] w-[200px] h-[200px] rounded-full bg-[#4a9eda]/5 blur-3xl pointer-events-none" />
+        <div className="absolute top-[-80px] right-[-80px] w-[420px] h-[420px] rounded-full bg-[#6366F1]/20 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-[-60px] left-[-60px] w-[320px] h-[320px] rounded-full bg-[#8B5CF6]/15 blur-3xl pointer-events-none" />
+        <div className="absolute top-[40%] left-[30%] w-[200px] h-[200px] rounded-full bg-[#06B6D4]/8 blur-3xl pointer-events-none" />
 
         {/* Logo */}
         <div className="relative z-10 flex items-center gap-1.5">
-          <span className="text-[#1F4E79] font-bold text-2xl tracking-tight">Job</span>
+          <span className="font-bold text-2xl tracking-tight bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] bg-clip-text text-transparent">Job</span>
           <span className="text-white font-bold text-2xl tracking-tight">Pilot</span>
-          <span className="ml-1 text-xs bg-[#1F4E79]/20 text-[#4a9eda] px-2 py-0.5 rounded-full border border-[#1F4E79]/40">AI</span>
+          <span className="ml-1 text-xs bg-[#6366F1]/10 text-[#8B5CF6] px-2 py-0.5 rounded-full border border-[#6366F1]/30">AI</span>
         </div>
 
         {/* Hero text + features */}
@@ -70,11 +70,11 @@ function LoginForm() {
           <div>
             <h1 className="text-[42px] font-bold text-white leading-[1.15] tracking-tight mb-4">
               Your career,<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4a9eda] to-[#79b8ff]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] via-[#8B5CF6] to-[#06B6D4]">
                 on autopilot.
               </span>
             </h1>
-            <p className="text-[#8b949e] text-lg leading-relaxed max-w-sm">
+            <p className="text-[#94A3B8] text-lg leading-relaxed max-w-sm">
               AI-powered resumes and cover letters tailored for any job, anywhere in the world.
             </p>
           </div>
@@ -87,37 +87,37 @@ function LoginForm() {
               { icon: '✦', label: 'Track every application in one place' },
             ].map((f) => (
               <div key={f.label} className="flex items-center gap-3">
-                <span className="text-[#4a9eda] text-xs mt-0.5 shrink-0">{f.icon}</span>
-                <span className="text-[#c9d1d9] text-sm">{f.label}</span>
+                <span className="text-[#8B5CF6] text-xs mt-0.5 shrink-0">{f.icon}</span>
+                <span className="text-[#CBD5E1] text-sm">{f.label}</span>
               </div>
             ))}
           </div>
 
           {/* Testimonial / trust */}
           <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-5">
-            <p className="text-[#c9d1d9] text-sm leading-relaxed italic">
+            <p className="text-[#CBD5E1] text-sm leading-relaxed italic">
               &ldquo;Generated a tailored resume for a nursing role in 20 seconds. Landed the interview the next day.&rdquo;
             </p>
-            <p className="text-[#484f58] text-xs mt-3">— JobPilot user</p>
+            <p className="text-[#475569] text-xs mt-3">— JobPilot user</p>
           </div>
         </div>
 
-        <p className="relative z-10 text-[#30363d] text-xs">© 2026 JobPilot</p>
+        <p className="relative z-10 text-[#1e293b] text-xs">© 2026 JobPilot</p>
       </div>
 
       {/* ── Right form panel ── */}
-      <div className="w-full lg:w-[48%] flex items-center justify-center p-6 md:p-12">
+      <div className="w-full lg:w-[48%] flex items-center justify-center p-6 md:p-12 bg-[#0D1020]">
         <div className="w-full max-w-[400px]">
           {/* Mobile logo */}
           <div className="flex items-center gap-1.5 mb-10 lg:hidden">
-            <span className="text-[#1F4E79] font-bold text-xl">Job</span>
+            <span className="font-bold text-xl bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] bg-clip-text text-transparent">Job</span>
             <span className="text-white font-bold text-xl">Pilot</span>
           </div>
 
           {/* Heading */}
           <div className="mb-8">
             <h2 className="text-2xl font-bold text-white mb-1.5">Welcome back</h2>
-            <p className="text-[#8b949e] text-sm">Sign in to your account to continue</p>
+            <p className="text-[#94A3B8] text-sm">Sign in to your account to continue</p>
           </div>
 
           {/* Email verified success */}
@@ -162,15 +162,15 @@ function LoginForm() {
 
           {/* Divider */}
           <div className="relative flex items-center gap-4 mb-5">
-            <div className="flex-1 h-px bg-[#21262d]" />
-            <span className="text-[#484f58] text-xs shrink-0">or continue with email</span>
-            <div className="flex-1 h-px bg-[#21262d]" />
+            <div className="flex-1 h-px bg-white/[0.06]" />
+            <span className="text-[#475569] text-xs shrink-0">or continue with email</span>
+            <div className="flex-1 h-px bg-white/[0.06]" />
           </div>
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-[#8b949e] uppercase tracking-wider mb-2">
+              <label className="block text-xs font-medium text-[#94A3B8] uppercase tracking-wider mb-2">
                 Email address
               </label>
               <input
@@ -180,18 +180,18 @@ function LoginForm() {
                 placeholder="you@example.com"
                 required
                 autoComplete="email"
-                className="w-full px-4 py-3 bg-[#161b22] border border-[#30363d] hover:border-[#484f58] focus:border-[#1F4E79] focus:ring-2 focus:ring-[#1F4E79]/20 rounded-xl text-white placeholder-[#484f58] outline-none transition-all duration-200 text-sm"
+                className="w-full px-4 py-3 bg-[#080C14] border border-white/[0.08] hover:border-white/[0.15] focus:border-[#6366F1] focus:ring-2 focus:ring-[#6366F1]/20 rounded-xl text-white placeholder-[#475569] outline-none transition-all duration-200 text-sm"
               />
             </div>
 
             <div>
               <div className="flex items-center justify-between mb-2">
-                <label className="text-xs font-medium text-[#8b949e] uppercase tracking-wider">
+                <label className="text-xs font-medium text-[#94A3B8] uppercase tracking-wider">
                   Password
                 </label>
                 <Link
                   href="/forgot-password"
-                  className="text-xs text-[#4a9eda] hover:text-[#79b8ff] transition-colors"
+                  className="text-xs text-[#8B5CF6] hover:text-[#A78BFA] transition-colors"
                 >
                   Forgot password?
                 </Link>
@@ -204,12 +204,12 @@ function LoginForm() {
                   placeholder="Enter your password"
                   required
                   autoComplete="current-password"
-                  className="w-full px-4 py-3 pr-11 bg-[#161b22] border border-[#30363d] hover:border-[#484f58] focus:border-[#1F4E79] focus:ring-2 focus:ring-[#1F4E79]/20 rounded-xl text-white placeholder-[#484f58] outline-none transition-all duration-200 text-sm"
+                  className="w-full px-4 py-3 pr-11 bg-[#080C14] border border-white/[0.08] hover:border-white/[0.15] focus:border-[#6366F1] focus:ring-2 focus:ring-[#6366F1]/20 rounded-xl text-white placeholder-[#475569] outline-none transition-all duration-200 text-sm"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#484f58] hover:text-[#8b949e] transition-colors p-1"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#475569] hover:text-[#94A3B8] transition-colors p-1"
                   tabIndex={-1}
                 >
                   {showPassword ? <EyeOffIcon /> : <EyeIcon />}
@@ -220,7 +220,7 @@ function LoginForm() {
             <button
               type="submit"
               disabled={loading || googleLoading}
-              className="w-full py-3 px-4 bg-[#1F4E79] hover:bg-[#2563a8] active:bg-[#1a4269] text-white font-semibold rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm mt-2"
+              className="w-full py-3 px-4 bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] hover:opacity-90 active:opacity-80 text-white font-semibold rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm mt-2 shadow-lg shadow-[#6366F1]/20"
             >
               {loading ? (
                 <>
@@ -233,11 +233,11 @@ function LoginForm() {
             </button>
           </form>
 
-          <p className="text-center text-[#8b949e] text-sm mt-6">
+          <p className="text-center text-[#94A3B8] text-sm mt-6">
             Don&apos;t have an account?{' '}
             <Link
               href="/signup"
-              className="text-[#4a9eda] hover:text-[#79b8ff] font-medium transition-colors"
+              className="text-[#8B5CF6] hover:text-[#A78BFA] font-medium transition-colors"
             >
               Create one free
             </Link>

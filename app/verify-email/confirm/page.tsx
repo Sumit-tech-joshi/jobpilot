@@ -36,21 +36,21 @@ function ConfirmContent() {
   }, [token])
 
   return (
-    <div className="min-h-screen bg-[#0d1117] flex items-center justify-center p-6">
+    <div className="min-h-screen bg-[#080C14] flex items-center justify-center p-6">
       <div className="w-full max-w-md text-center">
         {/* Logo */}
         <div className="flex items-center justify-center gap-1.5 mb-12">
-          <span className="text-[#1F4E79] font-bold text-2xl tracking-tight">Job</span>
+          <span className="font-bold text-2xl tracking-tight bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] bg-clip-text text-transparent">Job</span>
           <span className="text-white font-bold text-2xl tracking-tight">Pilot</span>
         </div>
 
         {status === 'loading' && (
           <div className="space-y-4">
-            <div className="w-16 h-16 rounded-full bg-[#1F4E79]/10 border border-[#1F4E79]/20 flex items-center justify-center mx-auto">
-              <span className="w-7 h-7 border-2 border-[#1F4E79]/30 border-t-[#4a9eda] rounded-full animate-spin block" />
+            <div className="w-16 h-16 rounded-full bg-[#6366F1]/10 border border-[#6366F1]/20 flex items-center justify-center mx-auto">
+              <span className="w-7 h-7 border-2 border-[#6366F1]/20 border-t-[#8B5CF6] rounded-full animate-spin block" />
             </div>
             <h1 className="text-xl font-bold text-white">Verifying your email…</h1>
-            <p className="text-[#8b949e] text-sm">This will only take a moment.</p>
+            <p className="text-[#94A3B8] text-sm">This will only take a moment.</p>
           </div>
         )}
 
@@ -68,14 +68,14 @@ function ConfirmContent() {
 
             <div>
               <h1 className="text-2xl font-bold text-white mb-2">Email verified!</h1>
-              <p className="text-[#8b949e] leading-relaxed">
+              <p className="text-[#94A3B8] leading-relaxed">
                 Your account is active. Sign in to set up your profile and start generating job-winning documents.
               </p>
             </div>
 
             <Link
               href="/login?verified=true"
-              className="inline-flex items-center justify-center gap-2 w-full py-3 px-6 bg-[#1F4E79] hover:bg-[#2563a8] text-white font-semibold rounded-xl transition-all duration-200 text-sm"
+              className="inline-flex items-center justify-center gap-2 w-full py-3 px-6 bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] hover:opacity-90 text-white font-semibold rounded-xl transition-all duration-200 text-sm shadow-lg shadow-[#6366F1]/20"
             >
               Continue to Sign In
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,19 +98,19 @@ function ConfirmContent() {
 
             <div>
               <h1 className="text-2xl font-bold text-white mb-2">Verification failed</h1>
-              <p className="text-[#8b949e] leading-relaxed text-sm">{errorMsg}</p>
+              <p className="text-[#94A3B8] leading-relaxed text-sm">{errorMsg}</p>
             </div>
 
             <div className="flex flex-col gap-3">
               <Link
                 href="/signup"
-                className="inline-flex items-center justify-center w-full py-3 px-6 bg-[#1F4E79] hover:bg-[#2563a8] text-white font-semibold rounded-xl transition-all duration-200 text-sm"
+                className="inline-flex items-center justify-center w-full py-3 px-6 bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] hover:opacity-90 text-white font-semibold rounded-xl transition-all duration-200 text-sm shadow-lg shadow-[#6366F1]/20"
               >
                 Back to Sign Up
               </Link>
               <Link
                 href="/login"
-                className="inline-flex items-center justify-center w-full py-3 px-6 bg-white/[0.05] hover:bg-white/[0.09] border border-white/10 text-[#c9d1d9] font-medium rounded-xl transition-all duration-200 text-sm"
+                className="inline-flex items-center justify-center w-full py-3 px-6 bg-white/[0.05] hover:bg-white/[0.09] border border-white/10 text-[#CBD5E1] font-medium rounded-xl transition-all duration-200 text-sm"
               >
                 Go to Sign In
               </Link>

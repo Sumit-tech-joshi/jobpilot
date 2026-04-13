@@ -72,12 +72,12 @@ export default function ApplicationsPage() {
     <div className="max-w-7xl mx-auto px-6 py-8">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-white mb-1">My Applications</h1>
-          <p className="text-gray-500 text-sm">Track all your job applications in one place</p>
+          <h1 className="text-2xl font-bold text-white mb-1">My <span className="bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] bg-clip-text text-transparent">Applications</span></h1>
+          <p className="text-[#475569] text-sm">Track all your job applications in one place</p>
         </div>
         <Link
           href="/jobs"
-          className="bg-[#1F4E79] hover:bg-[#2563a0] text-white font-medium px-4 py-2.5 rounded-lg text-sm transition-colors"
+          className="bg-gradient-to-r from-[#6366F1] to-[#8B5CF6] hover:opacity-90 text-white font-medium px-4 py-2.5 rounded-xl text-sm transition-all shadow-lg shadow-[#6366F1]/20"
         >
           Find More Jobs
         </Link>
@@ -88,16 +88,16 @@ export default function ApplicationsPage() {
           {Array.from({ length: 5 }).map((_, i) => (
             <div
               key={i}
-              className="bg-[#161b22] border border-[#30363d] rounded-xl h-14 animate-pulse"
+              className="bg-white/[0.02] border border-white/[0.06] rounded-2xl h-14 animate-pulse"
             />
           ))}
         </div>
       ) : error ? (
-        <div className="bg-red-500/10 border border-red-500/30 text-red-400 text-sm rounded-lg px-4 py-3">
+        <div className="bg-red-500/10 border border-red-500/30 text-red-400 text-sm rounded-xl px-4 py-3">
           {error}
         </div>
       ) : (
-        <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-6">
+        <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6">
           <ApplicationTable
             applications={applications}
             onDelete={handleDelete}
